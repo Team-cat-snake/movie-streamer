@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import keys from "../../config/keys"
+
+
 
 
 class Film extends Component {
@@ -13,7 +14,7 @@ class Film extends Component {
   }
 
   componentDidMount(){
-    // ttps://api.themoviedb.org/3/search/movie?api_key=423831fafaaddf7051875b12e578a7ed&language=en-US&page=1&include_adult=false
+    // ttps://api.themoviedb.org/3/search/movie?api_key=process.env.API_KEYed&language=en-US&page=1&include_adult=false
     fetch("https://api.themoviedb.org/3/search/movie?api_key=&query=ghostbusters&language=en-US&page=1&include_adult=false")
     .then(res => res.json())
     .then(d => {
