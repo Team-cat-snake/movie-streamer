@@ -9,7 +9,7 @@ movieController.getNowPlaying = (req, res, next) => {
     .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.API_KEY}&language=en-US&page=1`)
     .then(result => {
       res.locals.nowPlaying = result.data.results;
-
+      
       return next();
     })
     .catch(err => next({
