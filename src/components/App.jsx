@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Nav from './Nav.jsx';
+// import Search from './Search.jsx';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       nowPlaying: [],
-      searchResult:[],
     }
 
     this.getNowPlaying = this.getNowPlaying.bind();
@@ -27,28 +30,14 @@ class App extends Component {
       })
   }
 
-  getSearchResult(event) {  
-    event.preventDefault();
-    const searched = event.target.searched.value;
-    axios
-      .get(`/movie/search/${searched}`)
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      })
-  }
-
   render() {
     return (
-      <div className='app'>
-        <h2>Movie On</h2>
-        <form onSubmit={this.getSearchResult}>
-          <input type='text' name='searched' placeholder='Find Movies' />
-          <button type='submit'>Search</button>
-        </form>
-      </div>
+      <Router>
+        <div>
+          <Nav />
+         
+        </div>
+      </Router>
     )
   }
 }
