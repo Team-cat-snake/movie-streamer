@@ -10,7 +10,7 @@ const createUser = (req, res, next) => {
     bcrypt.hash(req.body.pass, salt, function (err, hash) {
       if (err) return next (err);
       req.body.pass = hash;
-      let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}')`;
+      let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}') ON CONFLICT (NAME) DO NOTHING`;
       pool.query(queryForSignUp, (err, result) => {
         if (err) return next();
         return next();

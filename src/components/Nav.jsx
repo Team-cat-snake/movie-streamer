@@ -5,12 +5,13 @@ import App from './App.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
-export default function Nav() {
-   return (
+export default function Nav(props) {
+  const {handleFieldChange, userFields, clearInput, submitLogin, submitSignup} = props;
+  return (
     <div className="navbar">
 
       <h1>Movie On</h1>
-       <Link exact to="/">Home</Link>
+       <Link to="/">Home</Link>
      <nav className="nav-links">
         <ul>
           <li>
@@ -27,10 +28,20 @@ export default function Nav() {
 
       <Switch>
         <Route path="/login">
-          <Login />
+          <Login 
+            userFields={userFields}
+            handleFieldChange={handleFieldChange} 
+            clearInput={clearInput}
+            submitLogin={submitLogin}
+          />
         </Route>
         <Route path="/signup">
-          <Signup />
+          <Signup 
+            userFields={userFields}
+            handleFieldChange={handleFieldChange} 
+            clearInput={clearInput}
+            submitSignup={submitSignup}
+          />
         </Route>
       </Switch>
     </div>
