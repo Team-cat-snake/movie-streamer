@@ -32,6 +32,10 @@ app.get("/", (req, res) => {
    res.status(200).sendFile(path.resolve(__dirname, '../src/views/index.html'));
 });
 
+app.get("/login", (req, res) => {
+  res.send("login")
+})
+
 app.all('*', (req, res) => {
   res.sendStatus(404);
 });
