@@ -51,8 +51,14 @@ body {
   border: 3px solid red;
 }
 
-.login-form input {
-  width: 180px;
+.input-field {
+  width: 380px;
+  height: 20px;
+  margin: 20px;
+}
+
+.submit-btn {
+  width: 50px;
 }
 
 

@@ -13,7 +13,8 @@ export default function Login(props) {
       <form action="" onSubmit={(e) => submitLogin(e)} className="login-form">
         
         <input 
-          placeholder='User'
+          className="input-field"
+          placeholder='Username'
           type="text"
           value={userFields.username}
           onChange={(e) => {handleFieldChange(e)}}
@@ -21,13 +22,14 @@ export default function Login(props) {
           />
           
           <input 
-          placeholder="password"
+          className="input-field"
+          placeholder="Password"
           type="password"
           value={userFields.password}
           onChange={(e) => {handleFieldChange(e)}}
           name="password"
           />
-          <button type='submit'>Submit</button>
+        <button className="submit-btn" type='submit'>Submit</button>
       </form>
     </div>
   )

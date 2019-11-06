@@ -8,12 +8,13 @@ export default function Signup(props) {
   }, [])
 
   return ( 
-    <div>
+    <div class="login">
     <h1>Please Signup Below</h1>
-      <form action="" onSubmit={(e) => submitSignup(e)}>
+      <form action="" onSubmit={(e) => submitSignup(e)} className="login-form">
         
         <input 
-          placeholder='User'
+          className="input-field"
+          placeholder='Username'
           type="text"
           value={userFields.username}
           onChange={(e) => {handleFieldChange(e)}}
@@ -21,13 +22,14 @@ export default function Signup(props) {
           />
           
           <input 
-          placeholder="password"
+          className="input-field"
+          placeholder="Password"
           type="password"
           value={userFields.password}
           onChange={(e) => {handleFieldChange(e)}}
           name="password"
           />
-          <button type='submit'>Submit</button>
+        <button className="submit-btn" type='submit'>Submit</button>
       </form>
     </div>
   )
