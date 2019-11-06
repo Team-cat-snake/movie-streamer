@@ -9,7 +9,7 @@ export default function Signup(props) {
 
   return ( 
     <div>
-    <h1>Please Login Gangsta</h1>
+    <h1>Please Signup Below</h1>
       <form action="" onSubmit={(e) => submitSignup(e)}>
         
         <input 

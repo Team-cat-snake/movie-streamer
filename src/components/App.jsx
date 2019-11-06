@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Nav from './Nav.jsx';
-// import Search from './Search.jsx';
+import Search from './Search.jsx';
 
 class App extends Component {
   constructor() {

@@ -8,9 +8,9 @@ export default function Login(props) {
   }, [])
 
   return ( 
-    <div>
-    <h1>Please Login Gangsta</h1>
-      <form action="" onSubmit={(e) => submitLogin(e)}>
+    <div className="login">
+    <h1>Please Login Below</h1>
+      <form action="" onSubmit={(e) => submitLogin(e)} className="login-form">
         
         <input 
           placeholder='User'
