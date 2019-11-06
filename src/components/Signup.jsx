@@ -1,49 +1,34 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fields: {
-        user: '',
-        pass: ''
-      }
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+export default function Signup(props) {
+  const {handleFieldChange, userFields, clearInput, submitSignup} = props;
 
-  handleChange(e) {
-    const fields = this.state.fields;
-    fields[e.target.name] = e.target.value;
-    this.setState({fields})
-    console.log("A", this.state.fields)
-  }
-  render() {
-    return (
-      <div>
-        <h1>
-          Please signup below.
-        </h1>
-        <form action="">
-         
-          <input
-          placeholder="Username"
-            type="text"
-            value={this.state.user}
-            onChange={this.handleChange}
-            name="user"
+  useEffect(() => {
+    return (() => clearInput());
+  }, [])
+
+  return ( 
+    <div>
+    <h1>Please Login Gangsta</h1>
+      <form action="" onSubmit={(e) => submitSignup(e)}>
+        
+        <input 
+          placeholder='User'
+          type="text"
+          value={userFields.username}
+          onChange={(e) => {handleFieldChange(e)}}
+          name="username"
           />
           
-          <input
-            placeholder="password"
-            type="password"
-            value={this.state.pass}
-            onChange={this.handleChange}
-            name="pass"
+          <input 
+          placeholder="password"
+          type="password"
+          value={userFields.password}
+          onChange={(e) => {handleFieldChange(e)}}
+          name="password"
           />
-        </form>
-      </div>
-    )
-  }
-};
-export default Signup;
+          <button type='submit'>Submit</button>
+      </form>
+    </div>
+  )
+}
