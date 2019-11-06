@@ -2,6 +2,8 @@
 html,
 body {
   height: 100%;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 body {
@@ -28,10 +30,17 @@ body {
   max-height: 400px;
 }
 
-.movieList .eachMovie img:hover {
-  opacity: 0.3;
+.movieList .eachMovie img {
+  opacity: 0.6;
   filter: alpha(opacity=30);
   cursor: pointer;
+}
+.movieList .eachMovie img:hover {
+  opacity: 1.0;
+  /* filter: alpha(opacity=30); */
+  cursor: pointer;
+  -webkit-transform: scale(1.04);
+  transform: scale(1.04);
 }
 
 .movieDetail {
@@ -40,6 +49,10 @@ body {
 
 .movieDetail img {
   max-width: 100%;
+  max-height: 100vh;
+}
+
+.navbar {
   max-height: 100vh;
 }
 
@@ -55,3 +68,18 @@ body {
 
 
 
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  width: 180px;
+}

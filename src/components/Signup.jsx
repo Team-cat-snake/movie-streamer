@@ -3,8 +3,8 @@ import React from 'react';
 
 const Signup = ({ submitSignup }) => (
   <div className="login">
-    <h1>Please Signup Below</h1>
-          <form className="signup-form" onSubmit={submitSignup} className="login-form">
+    <h1>New User? Fill out this form.</h1>
+    <form className="signup-form" onSubmit={submitSignup} className="login-form">
       <input 
         className="input-field"
         placeholder='Enter username'
@@ -17,7 +17,7 @@ const Signup = ({ submitSignup }) => (
         type="password"
         name="password"
       />
-            <button className="submit-btn" type='submit'>Sign Up</button>
+      <button className="submit-btn" type='submit'>Sign Up</button>
     </form>
   </div>
 )
