@@ -9,22 +9,24 @@ export default function Nav(props) {
   const {submitLogin, submitSignup} = props;
   return (
     <div className="navbar">
+      <div className="header">
+        <h1>Movie On</h1>
+      </div>
 
-      <h1>Movie On</h1>
-       <Link to="/">Home</Link>
      <nav className="nav-links">
-        <ul>
-          <li>
+        <ul className="nav-ul">
+          <li className="link">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="link">
              <Link to="/login">Login</Link>
           </li>
-          <li>
+          <li className="link">
              <Link to="/signup">Signup</Link>
           </li>
         </ul>
      </nav>
       
-
-
 
       <Switch>
         <Route path="/login">

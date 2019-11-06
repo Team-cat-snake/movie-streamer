@@ -1,26 +1,22 @@
 import React from 'react';
 
-export default function Signup(props) {
-  const {submitSignup} = props;
+const Signup = ({ submitSignup }) => (
+  <div>
+    <h1>Please Signup Below</h1>
+    <form className="signup-form" onSubmit={submitSignup}>
+      <input 
+        placeholder='Enter username'
+        type="text"
+        name="username"
+      />       
+      <input 
+        placeholder="Enter password"
+        type="password"
+        name="password"
+      />
+      <button type='submit'>Sign Up</button>
+    </form>
+  </div>
+)
 
-  return ( 
-    <div>
-    <h1>Please Login Gangsta</h1>
-      <form action="" onSubmit={(e) => submitSignup(e)}>
-        
-        <input 
-          placeholder='User'
-          type="text"
-          name="username"
-          />
-          
-          <input 
-          placeholder="password"
-          type="password"
-          name="password"
-          />
-          <button type='submit'>Submit</button>
-      </form>
-    </div>
-  )
-}
+export default Signup;
