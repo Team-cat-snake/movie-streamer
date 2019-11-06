@@ -10,7 +10,7 @@ const createUser = (req, res, next) => {
     bcrypt.hash(req.body.pass, salt, function (err, hash) {
       if (err) return next (err);
       req.body.pass = hash;
-      let queryForSignUp = `INSERT INTO "Users" ("NAME", "PASSWORD") VALUES ('${req.body.user}', '${req.body.pass}')`;
+      let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}')`;
       pool.query(queryForSignUp, (err, result) => {
         if (err) return next();
         return next();
@@ -20,7 +20,7 @@ const createUser = (req, res, next) => {
 };
 
 const verifyUser = (req, res, next) => {
-  let queryforPW = `SELECT "PASSWORD" FROM "Users" WHERE "NAME" = '${req.body.user}'`;
+  let queryforPW = `SELECT PASSWORD FROM Users WHERE NAME = '${req.body.user}'`;
   pool.query(queryforPW, function (err, result) {
   if (err) return res.send('Not Verified');
     bcrypt.compare(req.body.pass, result.rows[0].password, (err, result) => {
