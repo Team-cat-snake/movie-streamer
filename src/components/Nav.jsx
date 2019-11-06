@@ -6,7 +6,7 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
 export default function Nav(props) {
-  const {handleFieldChange, userFields, clearInput, submitLogin, submitSignup} = props;
+  const {submitLogin, submitSignup} = props;
   return (
     <div className="navbar">
 
@@ -29,17 +29,11 @@ export default function Nav(props) {
       <Switch>
         <Route path="/login">
           <Login 
-            userFields={userFields}
-            handleFieldChange={handleFieldChange} 
-            clearInput={clearInput}
             submitLogin={submitLogin}
           />
         </Route>
         <Route path="/signup">
           <Signup 
-            userFields={userFields}
-            handleFieldChange={handleFieldChange} 
-            clearInput={clearInput}
             submitSignup={submitSignup}
           />
         </Route>
