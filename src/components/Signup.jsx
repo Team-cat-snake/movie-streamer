@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class Login extends Component {
-  constructor(props){
+class Signup extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       fields: {
@@ -9,41 +9,41 @@ class Login extends Component {
         pass: ''
       }
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e){
-    console.log(e.target.value);
+  handleChange(e) {
     const fields = this.state.fields;
     fields[e.target.name] = e.target.value;
     this.setState({fields})
-    console.log("news", this.state.fields)
+    console.log("A", this.state.fields)
   }
-
   render() {
-    return ( 
+    return (
       <div>
-      <h1>Please Login Gangsta</h1>
+        <h1>
+          Please signup below.
+        </h1>
         <form action="">
-          
-          <input 
-            placeholder='User'
+         
+          <input
+          placeholder="Username"
             type="text"
-            value={this.state.fields.user}
+            value={this.state.user}
             onChange={this.handleChange}
             name="user"
-            />
-            
-            <input 
+          />
+          
+          <input
             placeholder="password"
             type="password"
-            value={this.state.fields.pass}
+            value={this.state.pass}
             onChange={this.handleChange}
             name="pass"
-            />
+          />
         </form>
       </div>
     )
   }
 };
-export default Login;
+export default Signup;

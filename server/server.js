@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.send("login")
+  res.status(200).json()
 })
 
 app.all('*', (req, res) => {
