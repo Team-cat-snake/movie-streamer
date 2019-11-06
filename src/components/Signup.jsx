@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 
 export default function Signup(props) {
-  const {handleFieldChange, userFields, clearInput, submitSignup} = props;
-
-  useEffect(() => {
-    return (() => clearInput());
-  }, [])
+  const {submitSignup} = props;
 
   return ( 
     <div>
@@ -15,16 +11,12 @@ export default function Signup(props) {
         <input 
           placeholder='User'
           type="text"
-          value={userFields.username}
-          onChange={(e) => {handleFieldChange(e)}}
           name="username"
           />
           
           <input 
           placeholder="password"
           type="password"
-          value={userFields.password}
-          onChange={(e) => {handleFieldChange(e)}}
           name="password"
           />
           <button type='submit'>Submit</button>
