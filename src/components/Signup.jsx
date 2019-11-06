@@ -18,11 +18,15 @@ class Signup extends Component {
     this.setState({fields})
     console.log("A", this.state.fields)
   }
+
+  handleSubmit(e){
+    console.log(e.target);
+  }
   render() {
     return (
       <div>
         <h1>
-          Please signup below.
+          Please Signup Below.
         </h1>
         <form action="">
          
@@ -35,12 +39,14 @@ class Signup extends Component {
           />
           
           <input
-            placeholder="password"
+            placeholder="Password"
             type="password"
             value={this.state.pass}
             onChange={this.handleChange}
             name="pass"
           />
+
+          <input type="submit" value="Submit"  onSubmit={this.handleSubmit} />
         </form>
       </div>
     )

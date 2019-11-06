@@ -1,9 +1,29 @@
 html,
 body {
   height: 100%;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 body {
   background: cornsilk;
 }
-/*# sourceMappingURL=styles.css.map */
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+

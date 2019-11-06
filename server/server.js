@@ -31,10 +31,7 @@ app.post('/signup', userController.createUser, sessionController.startSession, (
 app.get("/", (req, res) => {
    res.status(200).sendFile(path.resolve(__dirname, '../src/views/index.html'));
 });
-
-app.get("/login", (req, res) => {
-  res.status(200).json()
-})
+ 
 
 app.all('*', (req, res) => {
   res.sendStatus(404);

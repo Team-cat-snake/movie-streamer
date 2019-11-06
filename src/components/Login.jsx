@@ -20,14 +20,18 @@ class Login extends Component {
     console.log("news", this.state.fields)
   }
 
+  handleSubmit(e){
+    console.log("e", e)
+  }
+
   render() {
     return ( 
       <div>
-      <h1>Please Login Gangsta</h1>
-        <form action="">
+      <h1>Please Login Below</h1>
+        <form action="" className="login-form">
           
           <input 
-            placeholder='User'
+            placeholder='Username'
             type="text"
             value={this.state.fields.user}
             onChange={this.handleChange}
@@ -35,12 +39,14 @@ class Login extends Component {
             />
             
             <input 
-            placeholder="password"
+            placeholder="Password"
             type="password"
             value={this.state.fields.pass}
             onChange={this.handleChange}
             name="pass"
             />
+
+            <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
         </form>
       </div>
     )

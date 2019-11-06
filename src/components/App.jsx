@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Nav from './Nav.jsx';
-// import Search from './Search.jsx';
+import Search from './Search.jsx';
 
 class App extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class App extends Component {
       nowPlaying: [],
     }
 
-    this.getNowPlaying = this.getNowPlaying.bind();
+    this.getNowPlaying = this.getNowPlaying.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +24,7 @@ class App extends Component {
       .get('/movie')
       .then(res => {
         const { nowPlaying } = res.data;
+        console.log(nowPlaying)
       })
       .catch(err => {
         console.error(err);
@@ -35,7 +36,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
-         
+         <Search />
         </div>
       </Router>
     )

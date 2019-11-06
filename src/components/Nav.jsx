@@ -8,11 +8,17 @@ import Signup from './Signup.jsx';
 export default function Nav() {
    return (
     <div className="navbar">
-
-      <h1>Movie On</h1>
-       <Link exact to="/">Home</Link>
-     <nav className="nav-links">
-        <ul>
+      <div className="header">
+        <h1>Movie On</h1>
+      </div>
+      <nav className="nav-links">
+       
+        <ul className="nav-ul">
+          <li>
+             <div className="home">
+               <Link to="/">Home</Link>
+             </div>
+          </li>
           <li>
              <Link to="/login">Login</Link>
           </li>
@@ -22,8 +28,6 @@ export default function Nav() {
         </ul>
      </nav>
       
-
-
 
       <Switch>
         <Route path="/login">
