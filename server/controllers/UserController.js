@@ -4,15 +4,16 @@ const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
 
 const createUser = (req, res, next) => {
+  console.log("INSIDE CREATE USER", req.body)
   if (!req.body.user || !req.body.pass) return res.redirect('/signup', {error: 'Please properly format the username and password'});
   bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
     if (err) return next(err);
     bcrypt.hash(req.body.pass, salt, function (err, hash) {
       if (err) return next (err);
       req.body.pass = hash;
-      let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}')`;
+      let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}') ON CONFLICT (NAME) DO NOTHING`;
       pool.query(queryForSignUp, (err, result) => {
-        if (err) return next();
+        if (err) return next({err: "Error creating user"});
         return next();
       })
     })
