@@ -9,7 +9,7 @@ module.exports = {
   },
   devServer: {
     proxy:{
-      context: ['/', '/movie'],
+      context: ['/', '/movie', '/favs'],
       target: 'http://localhost:3000'
     },
     contentBase: path.join(__dirname, '/src'),
