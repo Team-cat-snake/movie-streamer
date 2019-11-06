@@ -35,5 +35,5 @@ const signOut = (req, res, next) => {
 module.exports = {
   isLoggedIn,
   startSession,
-  signedOut
+  signOut
 };
