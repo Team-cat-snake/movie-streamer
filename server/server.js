@@ -5,6 +5,8 @@ const path = require("path");
 const userController = require('./controllers/UserController.js');
 const sessionController = require('./controllers/SessionController.js');
 const movies = require('./routes/movie.js');
+const favs = require('./routes/favorites.js');
+const toWatch = require('./routes/toWatch.js')
 
 const PORT = 3000;
 const app = express();
@@ -13,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
+app.use('/favs', favs);
 app.use('/movie', movies);
 
 app.get('/loggedIn', sessionController.isLoggedIn, (req, res) => {
@@ -20,7 +23,6 @@ app.get('/loggedIn', sessionController.isLoggedIn, (req, res) => {
 });
 
 app.post('/login', userController.verifyUser, sessionController.startSession, (req, res) => {
-  // res.redirect('/');
 	res.send("verified");
 });
 

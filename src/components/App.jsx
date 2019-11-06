@@ -102,9 +102,6 @@ class App extends Component {
       <div className='app'>
         <Router>
           <Nav 
-            userFields={this.state.userFields}
-            handleFieldChange={this.handleFieldChange} 
-            clearInput={this.clearInput}
             submitLogin={this.submitLogin}
             submitSignup={this.submitSignup}
           />
