@@ -1,36 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-export default function Signup(props) {
-  const {handleFieldChange, userFields, clearInput, submitSignup} = props;
 
-  useEffect(() => {
-    return (() => clearInput());
-  }, [])
-
-  return ( 
-    <div class="login">
+const Signup = ({ submitSignup }) => (
+  <div className="login">
     <h1>Please Signup Below</h1>
-      <form action="" onSubmit={(e) => submitSignup(e)} className="login-form">
-        
-        <input 
-          className="input-field"
-          placeholder='Username'
-          type="text"
-          value={userFields.username}
-          onChange={(e) => {handleFieldChange(e)}}
-          name="username"
-          />
-          
-          <input 
-          className="input-field"
-          placeholder="Password"
-          type="password"
-          value={userFields.password}
-          onChange={(e) => {handleFieldChange(e)}}
-          name="password"
-          />
-        <button className="submit-btn" type='submit'>Submit</button>
-      </form>
-    </div>
-  )
-}
+          <form className="signup-form" onSubmit={submitSignup} className="login-form">
+      <input 
+        className="input-field"
+        placeholder='Enter username'
+        type="text"
+        name="username"
+      />       
+      <input 
+        className="input-field"
+        placeholder="Enter password"
+        type="password"
+        name="password"
+      />
+            <button className="submit-btn" type='submit'>Sign Up</button>
+    </form>
+  </div>
+)
+
+export default Signup;
