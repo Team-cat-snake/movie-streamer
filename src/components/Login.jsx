@@ -1,55 +1,34 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-class Login extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      fields: {
-        user: '',
-        pass: ''
-      }
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
+export default function Login(props) {
+  const {handleFieldChange, userFields, clearInput, submitLogin} = props;
 
-  handleChange(e){
-    console.log(e.target.value);
-    const fields = this.state.fields;
-    fields[e.target.name] = e.target.value;
-    this.setState({fields})
-    console.log("news", this.state.fields)
-  }
+  useEffect(() => {
+    return (() => clearInput());
+  }, [])
 
-  handleSubmit(e){
-    console.log("e", e)
-  }
-
-  render() {
-    return ( 
-      <div className="login">
-      <h1>Please Login Below</h1>
-        <form action="" className="login-form">
+  return ( 
+    <div className="login">
+    <h1>Please Login Below</h1>
+      <form action="" onSubmit={(e) => submitLogin(e)} className="login-form">
+        
+        <input 
+          placeholder='User'
+          type="text"
+          value={userFields.username}
+          onChange={(e) => {handleFieldChange(e)}}
+          name="username"
+          />
           
           <input 
-            placeholder='Username'
-            type="text"
-            value={this.state.fields.user}
-            onChange={this.handleChange}
-            name="user"
-            />
-            
-            <input 
-            placeholder="Password"
-            type="password"
-            value={this.state.fields.pass}
-            onChange={this.handleChange}
-            name="pass"
-            />
-
-            <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
-        </form>
-      </div>
-    )
-  }
-};
-export default Login;
+          placeholder="password"
+          type="password"
+          value={userFields.password}
+          onChange={(e) => {handleFieldChange(e)}}
+          name="password"
+          />
+          <button type='submit'>Submit</button>
+      </form>
+    </div>
+  )
+}
