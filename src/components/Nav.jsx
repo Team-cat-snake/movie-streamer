@@ -14,15 +14,13 @@ export default function Nav() {
       <nav className="nav-links">
        
         <ul className="nav-ul">
-          <li>
-             <div className="home">
+          <li className="link">
                <Link to="/">Home</Link>
-             </div>
           </li>
-          <li>
+          <li className="link">
              <Link to="/login">Login</Link>
           </li>
-          <li>
+          <li className="link">
              <Link to="/signup">Signup</Link>
           </li>
         </ul>

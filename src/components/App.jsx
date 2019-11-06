@@ -36,7 +36,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
-         <Search />
+         {/* <Search /> */}
         </div>
       </Router>
     )
