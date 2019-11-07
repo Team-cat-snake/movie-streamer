@@ -5,7 +5,7 @@ const SearchResult = ({searchResult, getMovieDetail}) => {
   let searchResultList = [];
   for(const movie of searchResult) {
     searchResultList.push(
-      <EachMovie key={searchResult.indexOf(movie)} id={movie.id} title={movie.title} poster={movie.poster} rating={movie.rating} rateCount={movie.rateCount} getMovieDetail={getMovieDetail} />
+      <EachMovie key={searchResult.indexOf(movie)} id={movie.id} title={movie.title} releaseDate={movie.releaseDate} poster={movie.poster} rating={movie.rating} rateCount={movie.rateCount} getMovieDetail={getMovieDetail} />
     )
   }
 
