@@ -23,11 +23,11 @@ app.get('/loggedIn', sessionController.isLoggedIn, (req, res) => {
 });
 
 app.post('/login', userController.verifyUser, sessionController.startSession, (req, res) => {
-	res.send("verified");
+	res.status(200).send(res.locals);
 });
 
 app.post('/signup', userController.createUser, sessionController.startSession, (req, res) => {
-	res.send("user Created");
+	res.status(200).send(res.locals);
 });
 
 app.get("/", (req, res) => {

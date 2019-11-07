@@ -3,8 +3,7 @@ const uuidv4 = require('uuid/v4');
 
 const isLoggedIn = (req, res, next) => {
   if (req.headers.cookie === undefined) return next();
-  console.log('req.headers.cookie: ', req.headers.cookie)
-  const queryForCookie = `SELECT * from Sessions WHERE COOKIEID = '${req.headers.cookie.slice(13)}'`
+  const queryForCookie = `SELECT * from Sessions WHERE COOKIEID = '${req.headers.cookie.slice(9)}'`
   pool.query(queryForCookie, (err, result)=> {
     if (result === undefined) return next();
     if (err) return next(err);
@@ -20,6 +19,7 @@ const startSession = (req, res, next) => {
   pool.query(queryForCookie, (err, result) => {
     if (err) return next(err);
     res.cookie('MSCookie', cookie, { httpOnly: true });
+    res.locals.verified = 'verified';
     return next();
   });
 };
