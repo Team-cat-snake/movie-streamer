@@ -70,6 +70,7 @@ class App extends Component {
       .catch(err => {
         console.error(err);
       });
+      event.target.searched.value = '';
   }
 
   getMovieDetail(event, id) {
@@ -108,21 +109,19 @@ class App extends Component {
             submitLogin={this.submitLogin}
             submitSignup={this.submitSignup}
           />
-          <form onSubmit={this.getSearchResult}>
-            <input type='text' name='searched' placeholder='Find Movies' />
-            <button type='submit'>Search</button>
-          </form>
-          <SearchResult 
-            searchResult={this.state.searchResult} 
-            getMovieDetail={this.getMovieDetail} 
-          />
-          <NowPlaying 
-            nowPlaying={this.state.nowPlaying} 
-            getMovieDetail={this.getMovieDetail}
-          />
-          <MovieDetail 
-            movieDetail={this.state.movieDetail} 
-          />
+          <div>
+            <SearchResult 
+              searchResult={this.state.searchResult} 
+              getMovieDetail={this.getMovieDetail} 
+              />
+            <NowPlaying 
+              nowPlaying={this.state.nowPlaying} 
+              getMovieDetail={this.getMovieDetail}
+              />
+            <MovieDetail 
+              movieDetail={this.state.movieDetail} 
+              />
+            </div>
         </Router>
       </div>
     )

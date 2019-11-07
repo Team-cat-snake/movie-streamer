@@ -2,6 +2,8 @@
 html,
 body {
   height: 100%;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 body {
@@ -28,10 +30,16 @@ body {
   max-height: 400px;
 }
 
-.movieList .eachMovie img:hover {
-  opacity: 0.3;
+.movieList .eachMovie img {
+  opacity: 1;
   filter: alpha(opacity=30);
   cursor: pointer;
+}
+.movieList .eachMovie img:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  -webkit-transform: scale(1.04);
+  transform: scale(1.04);
 }
 
 .movieDetail {
@@ -42,4 +50,62 @@ body {
   max-width: 100%;
   max-height: 100vh;
 }
-/*# sourceMappingURL=styles.css.map */
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.link { 
+  margin: 5px;
+}
+
+.navbar {
+  max-height: 100vh;
+}
+
+.input-field {
+  width: 380px;
+  height: 20px;
+  margin: 20px;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  width: 180px;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
