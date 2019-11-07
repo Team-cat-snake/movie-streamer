@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
 import Nav from './Nav';
 import Login from './Login';
@@ -9,6 +9,8 @@ import SearchForm from './SearchForm';
 import NowPlaying from './NowPlaying';
 import SearchResult from './SearchResult';
 import MovieDetail from './MovieDetail';
+// import Favorites from './Favorites';
+// import ToWatch from './ToWatch';
 
 class App extends Component {
   constructor() {
@@ -19,7 +21,9 @@ class App extends Component {
       movieDetail: {},
       verified: false,
       condition: 'home',
-      currentUser: ''
+      currentUser: '',
+      favorites: [],
+      toWatch: []
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -27,6 +31,7 @@ class App extends Component {
     this.getMovieDetail = this.getMovieDetail.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
     this.submitSignup = this.submitSignup.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   submitLogin(e) {
@@ -36,7 +41,8 @@ class App extends Component {
     axios
       .post('/login', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'verified') {
+        console.log(res.data)
+        if(res.data.verified) {
           this.setState({
             verified: true,
             currentUser: username
@@ -52,12 +58,35 @@ class App extends Component {
     axios
       .post('/signup', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'user Created') {
+        if(res.data.verified) {
           this.setState({
             verified: true,
             currentUser: username
           });
         }
+      })
+  }
+
+  logOut() {
+    axios
+      .post('/logout', {user: this.state.currentUser})
+      .then(res => {
+        if(res.data.logOut) {
+          this.setState({
+            verified: false,
+            currentUser: '',
+            favorites: [],
+            toWatch: []
+          })
+        }
+      })
+  }
+
+  getFavorites() {
+    axios
+      .post('/favs', {user: this.state.currentUser})
+      .then(res => {
+        this.setState({favorites: res.data})
       })
   }
 
@@ -129,9 +158,11 @@ class App extends Component {
   }
 
   render() {
+    console.log('are we verifed? ', this.state.verified);
+    console.log('current user: ', this.state.currentUser);
     return (
       <Router>
-        <Nav />
+        <Nav verified={this.state.verified} logOut={this.logOut} user={this.state.currentUser}/>
         <Switch>
           <Route exact path="/">
             <SearchForm getSearchResult={this.getSearchResult}/>
@@ -157,14 +188,18 @@ class App extends Component {
             }
           </Route>
           <Route path="/login">
-            <Login 
-              submitLogin={this.submitLogin}
-            />
+            {this.state.verified ? <Redirect to="/" /> : 
+              <Login 
+                submitLogin={this.submitLogin}
+              />
+            }
           </Route>
           <Route path="/signup">
-            <Signup 
-              submitSignup={this.submitSignup}
-            />
+            {this.state.verified ? <Redirect to="/" /> : 
+              <Signup 
+                submitSignup={this.submitSignup}
+              />
+            }
           </Route>
         </Switch>
       </Router>

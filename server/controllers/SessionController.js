@@ -24,11 +24,12 @@ const startSession = (req, res, next) => {
   });
 };
 
-const signOut = (req, res, next) => {
+const logOut = (req, res, next) => {
+  console.log(req.body)
   const queryForCookie = `DELETE FROM Sessions WHERE USERID = '${req.body.user}'`;
   pool.query(queryForCookie, (err, result) => {
     if (err) return next(err);
-    res.locals.signedOut = 'signedOut';
+    res.locals.logOut = 'logOut';
     return next();
   });
 };
@@ -36,5 +37,5 @@ const signOut = (req, res, next) => {
 module.exports = {
   isLoggedIn,
   startSession,
-  signOut
+  logOut
 };

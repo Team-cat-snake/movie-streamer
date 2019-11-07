@@ -13,8 +13,8 @@ const getFavs = (req, res, next) => {
 }
 
 const addFavs = (req, res, next) => {
-  const {movie_id, title, poster, rating, rate_count, user_name} = req.body;
-  const queryAddFavs = `INSERT INTO Favorites (MOVIE_ID, TITLE, POSTER, RATING, RATE_COUNT, USER_NAME) VALUES (${movie_id}, '${title}', '${poster}', ${rating}, ${rate_count}, '${user_name}')`;
+  const {movie_id, title, poster, rating, rate_count, release_date, user_name} = req.body;
+  const queryAddFavs = `INSERT INTO Favorites (MOVIE_ID, TITLE, POSTER, RATING, RATE_COUNT, RELEASE_DATE, USER_NAME) VALUES (${movie_id}, '${title}', '${poster}', ${rating}, ${rate_count}, '${release_date}', '${user_name}')`;
   pool.query(queryAddFavs, (err, result) => {
     if(err) return next(err);
     res.locals.favs = result.rows;
