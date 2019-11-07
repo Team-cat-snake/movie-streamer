@@ -21,7 +21,9 @@ class App extends Component {
       movieDetail: {},
       verified: false,
       condition: 'home',
-      currentUser: ''
+      currentUser: '',
+      favorites: [],
+      toWatch: []
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -72,9 +74,19 @@ class App extends Component {
         if(res.data.logOut) {
           this.setState({
             verified: false,
-            currentUser: ''
+            currentUser: '',
+            favorites: [],
+            toWatch: []
           })
         }
+      })
+  }
+
+  getFavorites() {
+    axios
+      .post('/favs', {user: this.state.currentUser})
+      .then(res => {
+        this.setState({favorites: res.data})
       })
   }
 
