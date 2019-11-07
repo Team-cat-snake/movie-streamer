@@ -17,7 +17,8 @@ export default function Nav({verified, logOut, user}) {
   }
   else {
     links = (
-      <ul className = "nav-ul">
+      <ul className="nav-ul">
+        <p className='username'>{`Welcome ${user}`}</p>
         <li>
           <Link className="link" to="/favorites">Favorites</Link>
         </li>

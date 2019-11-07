@@ -9,8 +9,8 @@ import SearchForm from './SearchForm';
 import NowPlaying from './NowPlaying';
 import SearchResult from './SearchResult';
 import MovieDetail from './MovieDetail';
-// import Favorites from './Favorites';
-// import ToWatch from './ToWatch';
+import Favorites from './Favorites';
+import ToWatch from './ToWatch';
 
 class App extends Component {
   constructor() {
@@ -41,7 +41,6 @@ class App extends Component {
     axios
       .post('/login', {user: username, pass: password})
       .then(res => {
-        console.log(res.data)
         if(res.data.verified) {
           this.setState({
             verified: true,
@@ -84,7 +83,29 @@ class App extends Component {
 
   getFavorites() {
     axios
-      .post('/favs', {user: this.state.currentUser})
+      .post('/favs', {
+        user: this.state.currentUser
+      })
+      .then(res => {
+        this.setState({favorites: res.data})
+      })
+  }
+
+  addFavorites() {
+    axios
+      .post('/favs/add', {
+        user: this.state.currentUser
+      })
+      .then(res => {
+        this.setState({favorites: res.data})
+      })
+  }
+
+  deleteFavorites() {
+    axios
+      .delete('/', {
+        user: this.state.currentUser
+      })
       .then(res => {
         this.setState({favorites: res.data})
       })
@@ -200,6 +221,12 @@ class App extends Component {
                 submitSignup={this.submitSignup}
               />
             }
+          </Route>
+          <Route path="/favorites">
+            <Favorites favorites={this.state.favorites} /> 
+          </Route>
+          <Route path="/toWatch">
+            <ToWatch toWatch={this.state.toWatch} />
           </Route>
         </Switch>
       </Router>
