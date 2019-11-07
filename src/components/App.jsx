@@ -3,9 +3,7 @@ import axios from 'axios';
 import NowPlaying from './NowPlaying';
 import MovieDetail from './MovieDetail';
 import SearchResult from './SearchResult';
-import SearchForm from './SearchForm';
 import Nav from './Nav';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -15,7 +13,8 @@ class App extends Component {
       searchResult:[],
       movieDetail: {},
       verified: false,
-      condition: 'home'
+      condition: 'home',
+      currentUser: ''
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -35,7 +34,8 @@ class App extends Component {
         if(res.data === 'verified') {
           this.setState({
             verified: true,
-            condition: 'home'
+            condition: 'home',
+            currentUser: username
           });
         }
       })
@@ -51,7 +51,8 @@ class App extends Component {
         if(res.data === 'user Created') {
           this.setState({
             verified: true,
-            condition: 'home'
+            condition: 'home',
+            currentUser: username
           });
         }
       })
@@ -84,6 +85,7 @@ class App extends Component {
       .catch(err => {
         console.error(err);
       });
+      event.target.searched.value = '';
   }
 
   getMovieDetail(event, id) {
@@ -107,7 +109,7 @@ class App extends Component {
     axios
       .get('/loggedIn')
       .then(res => {
-        if(res.data.verified) this.setState({verified: true});
+        if(res.data.verified) this.setState({verified: true, currentUser: res.data.cookie.userid});
       })
       .catch(err => {
         console.error(err);
@@ -115,19 +117,14 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.verified);
+    console.log('is user verified? ', this.state.verified);
+    console.log('current user: ', this.state.currentUser);
     return (
-      <div className='app'>
-        <Router>
-          <Nav 
-            userFields={this.state.userFields}
-            handleFieldChange={this.handleFieldChange} 
-            clearInput={this.clearInput}
-            submitLogin={this.submitLogin}
-            submitSignup={this.submitSignup}
-          />
-        </Router>
-        <SearchForm getSearchResult={this.getSearchResult} /> 
+      <div>
+        <Nav 
+          submitLogin={this.submitLogin}
+          submitSignup={this.submitSignup}
+        />
         { this.state.condition === 'home' &&
           <NowPlaying 
             nowPlaying={this.state.nowPlaying} 

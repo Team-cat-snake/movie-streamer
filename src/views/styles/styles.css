@@ -2,10 +2,18 @@
 html,
 body {
   height: 100%;
+  margin: 0;
 }
 
 body {
-  background: cornsilk;
+  background: ghostwhite;
+}
+
+#root {
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .movieList {
@@ -29,8 +37,8 @@ body {
 }
 
 .movieList .eachMovie img:hover {
-  opacity: 0.3;
-  filter: alpha(opacity=30);
+  -webkit-transform: scale(1.04);
+  transform: scale(1.04);
   cursor: pointer;
 }
 
@@ -41,5 +49,51 @@ body {
 .movieDetail img {
   max-width: 100%;
   max-height: 100vh;
+}
+
+.navbar {
+  height: 80px;
+  width: 100%;
+  background: #045590;
+  position: fixed;
+  top: 0;
+}
+
+.navbar .nav-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .nav-links a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+.navbar .nav-links a:hover {
+  color: purple;
+}
+
+.navbar .nav-links ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style-type: none;
+}
+
+.navbar .nav-links ul li {
+  font-size: 14px;
 }
 /*# sourceMappingURL=styles.css.map */

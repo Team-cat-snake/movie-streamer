@@ -11,9 +11,12 @@ const createUser = (req, res, next) => {
     bcrypt.hash(req.body.pass, salt, function (err, hash) {
       if (err) return next (err);
       req.body.pass = hash;
+      console.log("hash", hash)
       let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}') ON CONFLICT (NAME) DO NOTHING`;
       pool.query(queryForSignUp, (err, result) => {
         if (err) return next({err: "Error creating user"});
+        res.locals.user = req.body.user;
+        console.log("locals", res.locals.user)
         return next();
       })
     })
@@ -26,6 +29,7 @@ const verifyUser = (req, res, next) => {
   if (err) return res.send('Not Verified');
     bcrypt.compare(req.body.pass, result.rows[0].password, (err, result) => {
       if (err) return next(err);
+      res.locals.user = req.body.user;
       if (result) return next();
       else return res.send('Not Verified');
     })

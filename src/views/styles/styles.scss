@@ -1,15 +1,27 @@
+$prime-color-1: black;
+$prime-color-2: ghostwhite;
+$prime-color-3: purple;
+
 /* general */
 html,
 body {
   height: 100%;
+  margin: 0;
 }
 
 body {
-  background: cornsilk;
+  background: $prime-color-2;
+}
+
+#root {
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .movieList {
-  border: 1px black solid;
+  border: 1px $prime-color-1 solid;
   display: flex;
   width: 100%;
   height: 65vh;
@@ -24,8 +36,8 @@ body {
       max-height: 400px;
 
       &:hover {
-        opacity: 0.3;
-        filter: alpha(opacity=30);
+        -webkit-transform: scale(1.04);
+        transform: scale(1.04);
         cursor: pointer;
       }
     }
@@ -37,5 +49,39 @@ body {
   img{
     max-width: 100%;
     max-height: 100vh;
+  }
+}
+
+.navbar {
+  height: 80px;
+  width: 100%;
+  background: #045590;
+  position: fixed;
+  top: 0;
+
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    a {
+      color: $prime-color-2;;
+      text-decoration: none;
+
+      &:hover {
+        color: $prime-color-3;
+      }
+    }
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style-type: none;
+
+      li {
+        font-size: 14px;
+      }
+    }
   }
 }
