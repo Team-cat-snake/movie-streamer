@@ -100,6 +100,7 @@ class App extends Component {
       .get(`movie/details/${id}`)
       .then(res => {
         const { movieDetail } = res.data;
+        // console.log(movieDetail.re);
         this.setState({
           movieDetail,
           condition: 'detail'
