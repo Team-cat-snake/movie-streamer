@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import NowPlaying from './NowPlaying';
-// import MovieDetail from './MovieDetail';
-// import SearchResult from './SearchResult';
+import NowPlaying from './NowPlaying';
+import MovieDetail from './MovieDetail';
+import SearchResult from './SearchResult';
 import Nav from './Nav';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -69,6 +69,7 @@ class App extends Component {
       .catch(err => {
         console.error(err);
       });
+      event.target.searched.value = '';
   }
 
   getMovieDetail(event, id) {
@@ -109,7 +110,7 @@ class App extends Component {
             <input type='text' name='searched' placeholder='Find Movies' />
             <button type='submit'>Search</button>
           </form>
-          {/* <SearchResult 
+          <SearchResult 
             searchResult={this.state.searchResult} 
             getMovieDetail={this.getMovieDetail} 
           />
@@ -119,7 +120,7 @@ class App extends Component {
           />
           <MovieDetail 
             movieDetail={this.state.movieDetail} 
-          /> */}
+          />
         </Router>
       </div>
     )
