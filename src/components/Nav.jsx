@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Nav() {
+
   return (
     <nav className="navbar">
       <h2>
-          <Link id="logo" to="/">Movie On</Link>
+          <Link id="logo" onClick={()=>window.location.reload()} to="/">Movie On</Link>
       </h2>
       <ul className="nav-ul">
         <li>

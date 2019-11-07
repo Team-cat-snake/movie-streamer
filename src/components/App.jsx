@@ -66,7 +66,10 @@ class App extends Component {
       .get('/movie')
       .then(res => {
         const { nowPlaying } = res.data;
-        this.setState({nowPlaying});
+        this.setState({
+          nowPlaying,
+          condition: 'home'
+        });
       })
       .catch(err => {
         console.error(err);
@@ -81,7 +84,8 @@ class App extends Component {
       .then(res => {
         const { searchResult } = res.data;
         this.setState({
-          searchResult
+          searchResult,
+          condition: 'search'
         })
       })
       .catch(err => {
@@ -97,7 +101,8 @@ class App extends Component {
       .then(res => {
         const { movieDetail } = res.data;
         this.setState({
-          movieDetail
+          movieDetail,
+          condition: 'detail'
         });
       })
       .catch(err => {
@@ -128,11 +133,27 @@ class App extends Component {
         <Nav />
         <Switch>
           <Route exact path="/">
-            <SearchForm />
-            <NowPlaying 
-              nowPlaying={this.state.nowPlaying} 
-              getMovieDetail={this.getMovieDetail}
-            /> 
+            <SearchForm getSearchResult={this.getSearchResult}/>
+            {
+              this.state.condition === 'home' &&
+              <NowPlaying 
+                nowPlaying={this.state.nowPlaying} 
+                getMovieDetail={this.getMovieDetail}
+              /> 
+            }
+            {
+              this.state.condition === 'search' &&
+              <SearchResult 
+                searchResult={this.state.searchResult} 
+                getMovieDetail={this.getMovieDetail} 
+              />
+            }
+            {
+              this.state.condition === 'detail' &&
+              <MovieDetail 
+                movieDetail={this.state.movieDetail} 
+              />
+            }
           </Route>
           <Route path="/login">
             <Login 
@@ -144,18 +165,7 @@ class App extends Component {
               submitSignup={this.submitSignup}
             />
           </Route>
-          <Route path="/search">
-            <SearchResult 
-              searchResult={this.state.searchResult} 
-              getMovieDetail={this.getMovieDetail} 
-            />
-          </Route>
         </Switch>
-        { this.state.condition === 'detail' &&
-          <MovieDetail 
-            movieDetail={this.state.movieDetail} 
-          />
-        }
       </Router>
     )
   }
