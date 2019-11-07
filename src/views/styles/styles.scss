@@ -15,6 +15,73 @@ body {
   background: $prime-color-2;
 }
 
+.navbar {
+  height: 80px;
+  width: 100%;
+  background: $prime-color-1;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      font-size: 45px;
+
+      &:hover {
+        color: $prime-color-3;
+        font-size: 48px;
+      }
+    }
+
+    #logo {
+      font-size: 30px;
+      font-weight: bold;
+      color: $prime-color-2;;
+      text-decoration: none;
+      margin-left: 20px;
+  
+      &:hover {
+        color: $prime-color-3;
+        font-size: 33px;
+      }
+    }
+  }
+  
+  .link {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-right: 30px;
+    font-size: 18px;
+    color: $prime-color-1;
+    background: $prime-color-2;
+    font-weight: bold;
+    border-radius: 5px;
+
+    &:hover {
+      color: $prime-color-1;
+      background: $prime-color-3;
+    }
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+
+    li {
+      font-size: 14px;
+    }
+  }
+}
+
 .login-signup-container {
   margin: auto;
   margin-top: 150px;
@@ -98,33 +165,34 @@ body {
     display: flex;
     margin: auto;
     width: 94%;
-    height: 65vh;
+    height: 70vh;
     overflow-x: scroll;
     padding-top: 40px;
   }
 }
 
 .search-result-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
+  h2 {
+    text-align: center;
+  }
   .search-list {
     border: 4px $prime-color-1 solid;
     border-radius: 10px;
     display: flex;
     justify-content: space-evenly;
+    margin:auto;
     flex-wrap: wrap;
-    width: 90%;
-    height: 130vh;
+    width: 94%;
+    height: 140vh;
     overflow-x: scroll;
     padding-top: 40px;
   }
 }
 
 .eachMovie {
-  margin-left: 20px;
+  width: 20%;
+  padding: 20px;
+
   img {
     max-width: 400px;
     max-height: 400px;
@@ -139,61 +207,13 @@ body {
 }
 
 .movie-detail {
-  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   img{
     max-width: 100%;
     max-height: 100vh;
-  }
-}
-
-.navbar {
-  height: 80px;
-  width: 95%;
-  background: $prime-color-1;
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
-
-  #logo {
-    font-size: 30px;
-    font-weight: bold;
-    color: $prime-color-2;;
-    text-decoration: none;
-    margin-left: 20px;
-
-    &:hover {
-      color: $prime-color-3;
-      font-size: 33px;
-    }
-  }
-  
-  .link {
-    text-decoration: none;
-    padding: 10px 20px;
-    margin-right: 30px;
-    font-size: 18px;
-    color: $prime-color-1;
-    background: $prime-color-2;
-    font-weight: bold;
-    border-radius: 5px;
-
-    &:hover {
-      color: $prime-color-1;
-      background: $prime-color-3;
-    }
-  }
-
-  ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-
-    li {
-      font-size: 14px;
-    }
   }
 }

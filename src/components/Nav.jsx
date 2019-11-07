@@ -5,9 +5,14 @@ export default function Nav() {
 
   return (
     <nav className="navbar">
-      <h2>
-          <Link id="logo" onClick={()=>window.location.reload()} to="/">Movie On</Link>
-      </h2>
+      <div className="logo-container">
+        <Link id="logo" onClick={()=>window.location.reload()} to="/">
+          <i className="fas fa-film"></i>
+        </Link>
+        <h2>
+            <Link id="logo" onClick={()=>window.location.reload()} to="/">Movie On</Link>
+        </h2>
+      </div>
       <ul className="nav-ul">
         <li>
           <Link className="link" to="/login">Login</Link>
