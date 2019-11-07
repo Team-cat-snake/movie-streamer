@@ -80,7 +80,8 @@ body {
 }
 
 .submit-btn {
-  width: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .login {

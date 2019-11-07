@@ -17,7 +17,9 @@ const Login =({ submitLogin }) => (
           type="password"
           name="password"
         />
-        <button className="submit-btn" type='submit'>Sign in</button>
+        <div className="submit-btn">
+          <button className="submit-btn" type='submit'>Sign in</button>
+        </div>
     </form>
   </div>
 )
