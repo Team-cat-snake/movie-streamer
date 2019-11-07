@@ -27,7 +27,7 @@ app.post('/login', userController.verifyUser, sessionController.startSession, (r
 });
 
 app.post('/signup', userController.createUser, sessionController.startSession, (req, res) => {
-	res.status(200).send(res.locals);
+  res.redirect("/search");
 });
 
 app.get("/", (req, res) => {

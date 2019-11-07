@@ -31,13 +31,12 @@ body {
 }
 
 .movieList .eachMovie img {
-  opacity: 0.6;
+  opacity: 1;
   filter: alpha(opacity=30);
   cursor: pointer;
 }
 .movieList .eachMovie img:hover {
   opacity: 1.0;
-  /* filter: alpha(opacity=30); */
   cursor: pointer;
   -webkit-transform: scale(1.04);
   transform: scale(1.04);

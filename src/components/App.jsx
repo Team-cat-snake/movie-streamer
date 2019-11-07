@@ -109,7 +109,7 @@ class App extends Component {
             submitLogin={this.submitLogin}
             submitSignup={this.submitSignup}
           />
-          <div className="hidden">
+          <div>
             <SearchResult 
               searchResult={this.state.searchResult} 
               getMovieDetail={this.getMovieDetail} 
