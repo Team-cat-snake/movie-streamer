@@ -14,6 +14,7 @@ class App extends Component {
       searchResult:[],
       movieDetail: {},
       verified: false,
+      currentUser: ''
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -30,7 +31,7 @@ class App extends Component {
     axios
       .post('/login', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'verified') this.setState({verified: true});
+        if(res.data.verified === 'verified') this.setState({verified: true, currentUser: res.data.user});
       })
   }
 
@@ -41,7 +42,7 @@ class App extends Component {
     axios
       .post('/signup', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'user Created') this.setState({verified: true});
+        if(res.data.verified === 'verified') this.setState({verified: true, currentUser: res.data.user});
       })
   }
 
@@ -90,7 +91,8 @@ class App extends Component {
     axios
       .get('/loggedIn')
       .then(res => {
-        if(res.data.verified) this.setState({verified: true});
+        console.log('res.data: ', res.data)
+        if(res.data.verified) this.setState({verified: true, currentUser: res.data.cookie.userid});
       })
       .catch(err => {
         console.error(err);
@@ -98,7 +100,8 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.verified);
+    console.log('is user verified? ', this.state.verified);
+    console.log('current user: ', this.state.currentUser);
     return (
       <div className='app'>
         <Router>
