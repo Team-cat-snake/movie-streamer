@@ -9,8 +9,8 @@ import SearchForm from './SearchForm';
 import NowPlaying from './NowPlaying';
 import SearchResult from './SearchResult';
 import MovieDetail from './MovieDetail';
-// import Favorites from './Favorites';
-// import ToWatch from './ToWatch';
+import Favorites from './Favorites';
+import ToWatch from './ToWatch';
 
 class App extends Component {
   constructor() {
@@ -32,6 +32,8 @@ class App extends Component {
     this.submitLogin = this.submitLogin.bind(this);
     this.submitSignup = this.submitSignup.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+    this.getToWatch = this.getToWatch.bind(this);
   }
 
   submitLogin(e) {
@@ -90,6 +92,14 @@ class App extends Component {
       })
   }
 
+  getToWatch() {
+    axios
+      .post('/toWatch', {user: this.state.currentUser})
+      .then(res => {
+        this.setState({toWatch: res.data})
+      })
+  }
+
   getNowPlaying() {  
     axios
       .get('/movie')
@@ -141,16 +151,26 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getNowPlaying();
+    console.log('in CDM')
     axios
-      .get('/loggedIn')
-      .then(res => {
-        if(res.data.verified) {
-          this.setState({
-            verified: true, 
-            currentUser: res.data.cookie.userid
+      .get('/movie')
+      .then(result => {
+        axios
+          .get('/loggedIn')
+          .then(res => {
+            if(res.data.verified) {
+              const {nowPlaying} = result.data
+              this.setState({
+                nowPlaying,
+                condition: 'home',
+                verified: true, 
+                currentUser: res.data.cookie.userid
+              });
+            }
+          })
+          .catch(err => {
+            console.error(err);
           });
-        }
       })
       .catch(err => {
         console.error(err);
@@ -162,7 +182,13 @@ class App extends Component {
     console.log('current user: ', this.state.currentUser);
     return (
       <Router>
-        <Nav verified={this.state.verified} logOut={this.logOut} user={this.state.currentUser}/>
+        <Nav 
+          verified={this.state.verified}
+          logOut={this.logOut}
+          user={this.state.currentUser}
+          getFavorites={this.getFavorites}
+          getToWatch={this.getToWatch}
+        />
         <Switch>
           <Route exact path="/">
             <SearchForm getSearchResult={this.getSearchResult}/>
@@ -200,6 +226,12 @@ class App extends Component {
                 submitSignup={this.submitSignup}
               />
             }
+          </Route>
+          <Route path="/favs">
+            <Favorites favorites={this.state.favorites}/>
+          </Route>
+          <Route path="/toWatch">
+            <ToWatch toWatch={this.state.toWatch}/>
           </Route>
         </Switch>
       </Router>
