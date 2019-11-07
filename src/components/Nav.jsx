@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-export default function Nav({verified, logOut, user}) {
+export default function Nav({verified, logOut, user, getFavorites, getToWatch}) {
   let links;
   if(!verified) {
     links = (
@@ -19,10 +19,10 @@ export default function Nav({verified, logOut, user}) {
     links = (
       <ul className = "nav-ul">
         <li>
-          <Link className="link" to="/favorites">Favorites</Link>
+          <Link className="link" onClick={getFavorites} to="/favorites">Favorites</Link>
         </li>
         <li>
-          <Link className="link" to="/toWatch">To Watch</Link>
+          <Link className="link" onClick={getToWatch} to="/toWatch">To Watch</Link>
         </li>
         <li>
           <Link className="link" onClick={logOut} to="/">Log out</Link>
