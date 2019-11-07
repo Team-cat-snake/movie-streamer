@@ -1,51 +1,21 @@
-import React, { Component } from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import App from './App.jsx';
-import Login from './Login.jsx';
-import Signup from './Signup.jsx';
+export default function Nav() {
 
-export default function Nav(props) {
-  const {handleFieldChange, userFields, clearInput, submitLogin, submitSignup} = props;
   return (
-    <div className="navbar">
-      <div className="header">
-        <h1>Movie On</h1>
-      </div>
-
-     <nav className="nav-links">
-        <ul className="nav-ul">
-          <li className="link">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="link">
-             <Link to="/login">Login</Link>
-          </li>
-          <li className="link">
-             <Link to="/signup">Signup</Link>
-          </li>
-        </ul>
-     </nav>
-      
-
-      <Switch>
-        <Route path="/login">
-          <Login 
-            userFields={userFields}
-            handleFieldChange={handleFieldChange} 
-            clearInput={clearInput}
-            submitLogin={submitLogin}
-          />
-        </Route>
-        <Route path="/signup">
-          <Signup 
-            userFields={userFields}
-            handleFieldChange={handleFieldChange} 
-            clearInput={clearInput}
-            submitSignup={submitSignup}
-          />
-        </Route>
-      </Switch>
-    </div>
+    <nav className="navbar">
+      <h2>
+          <Link id="logo" onClick={()=>window.location.reload()} to="/">Movie On</Link>
+      </h2>
+      <ul className="nav-ul">
+        <li>
+          <Link className="link" to="/login">Login</Link>
+        </li>
+        <li>
+          <Link className="link" to="/signup">Signup</Link>
+        </li>
+      </ul>
+    </nav>
    )
 }

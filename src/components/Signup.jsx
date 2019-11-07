@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Signup = ({ submitSignup }) => (
-  <div>
-    <h1>Please Signup Below</h1>
-    <form className="signup-form" onSubmit={submitSignup}>
-      <input 
+  <div className="login-signup-container">
+    <h1>New User? Fill out this form</h1>
+    <form className="login-signup-form" onSubmit={submitSignup}>
+      <input
         placeholder='Enter username'
         type="text"
         name="username"

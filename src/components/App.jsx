@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import NowPlaying from './NowPlaying';
-import MovieDetail from './MovieDetail';
-import SearchResult from './SearchResult';
-import Nav from './Nav';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Nav from './Nav';
+import Login from './Login';
+import Signup from './Signup';
+import SearchForm from './SearchForm';
+import NowPlaying from './NowPlaying';
+import SearchResult from './SearchResult';
+import MovieDetail from './MovieDetail';
 
 class App extends Component {
   constructor() {
@@ -14,6 +18,8 @@ class App extends Component {
       searchResult:[],
       movieDetail: {},
       verified: false,
+      condition: 'home',
+      currentUser: ''
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -30,7 +36,12 @@ class App extends Component {
     axios
       .post('/login', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'verified') this.setState({verified: true});
+        if(res.data === 'verified') {
+          this.setState({
+            verified: true,
+            currentUser: username
+          });
+        }
       })
   }
 
@@ -41,7 +52,12 @@ class App extends Component {
     axios
       .post('/signup', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'user Created') this.setState({verified: true});
+        if(res.data === 'user Created') {
+          this.setState({
+            verified: true,
+            currentUser: username
+          });
+        }
       })
   }
 
@@ -50,7 +66,10 @@ class App extends Component {
       .get('/movie')
       .then(res => {
         const { nowPlaying } = res.data;
-        this.setState({nowPlaying});
+        this.setState({
+          nowPlaying,
+          condition: 'home'
+        });
       })
       .catch(err => {
         console.error(err);
@@ -64,11 +83,15 @@ class App extends Component {
       .get(`/movie/search/${searched}`)
       .then(res => {
         const { searchResult } = res.data;
-        this.setState({searchResult})
+        this.setState({
+          searchResult,
+          condition: 'search'
+        })
       })
       .catch(err => {
         console.error(err);
       });
+      event.target.searched.value = '';
   }
 
   getMovieDetail(event, id) {
@@ -77,7 +100,10 @@ class App extends Component {
       .get(`movie/details/${id}`)
       .then(res => {
         const { movieDetail } = res.data;
-        this.setState({movieDetail});
+        this.setState({
+          movieDetail,
+          condition: 'detail'
+        });
       })
       .catch(err => {
         console.error(err);
@@ -89,7 +115,12 @@ class App extends Component {
     axios
       .get('/loggedIn')
       .then(res => {
-        if(res.data.verified) this.setState({verified: true});
+        if(res.data.verified) {
+          this.setState({
+            verified: true, 
+            currentUser: res.data.cookie.userid
+          });
+        }
       })
       .catch(err => {
         console.error(err);
@@ -97,34 +128,45 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.verified);
     return (
-      <div className='app'>
-        <Router>
-          <Nav 
-            userFields={this.state.userFields}
-            handleFieldChange={this.handleFieldChange} 
-            clearInput={this.clearInput}
-            submitLogin={this.submitLogin}
-            submitSignup={this.submitSignup}
-          />
-          <form onSubmit={this.getSearchResult}>
-            <input type='text' name='searched' placeholder='Find Movies' />
-            <button type='submit'>Search</button>
-          </form>
-          <SearchResult 
-            searchResult={this.state.searchResult} 
-            getMovieDetail={this.getMovieDetail} 
-          />
-          <NowPlaying 
-            nowPlaying={this.state.nowPlaying} 
-            getMovieDetail={this.getMovieDetail}
-          />
-          <MovieDetail 
-            movieDetail={this.state.movieDetail} 
-          />
-        </Router>
-      </div>
+      <Router>
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <SearchForm getSearchResult={this.getSearchResult}/>
+            {
+              this.state.condition === 'home' &&
+              <NowPlaying 
+                nowPlaying={this.state.nowPlaying} 
+                getMovieDetail={this.getMovieDetail}
+              /> 
+            }
+            {
+              this.state.condition === 'search' &&
+              <SearchResult 
+                searchResult={this.state.searchResult} 
+                getMovieDetail={this.getMovieDetail} 
+              />
+            }
+            {
+              this.state.condition === 'detail' &&
+              <MovieDetail 
+                movieDetail={this.state.movieDetail} 
+              />
+            }
+          </Route>
+          <Route path="/login">
+            <Login 
+              submitLogin={this.submitLogin}
+            />
+          </Route>
+          <Route path="/signup">
+            <Signup 
+              submitSignup={this.submitSignup}
+            />
+          </Route>
+        </Switch>
+      </Router>
     )
   }
 }
