@@ -10,9 +10,9 @@ const SearchResult = ({searchResult, getMovieDetail}) => {
   }
 
   return(
-    <div className='searchResult'>
+    <div className='search-result-container'>
       <h2>Search Result</h2>
-      <div className='movieList'>
+      <div className='search-list'>
         {searchResultList}
       </div>
     </div>

@@ -1,11 +1,9 @@
 import React from 'react';
 
-
-export default function Search (props) {
+export default function SearchForm (props) {
   return (
-    <div className="login">
-      <h1>Search for a Movie</h1>
-      <form className="search-form" onSubmit={props.getSearchResult}>
+    <div className="search-form">
+      <form onSubmit={props.getSearchResult}>
         <input type='text' name='searched' placeholder='Find Movies' className='input-field' />
         <button type='submit'>Search</button>
       </form>
