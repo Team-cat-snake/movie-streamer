@@ -13,8 +13,8 @@ const getWatch = (req, res, next) => {
 }
 
 const addWatch = (req, res, next) => {
-  const {movie_id, title, poster, rating, rate_count, user_name} = req.body;
-  const queryAddWatch = `INSERT INTO ToWatch (MOVIE_ID, TITLE, POSTER, RATING, RATE_COUNT, USER_NAME) VALUES (${movie_id}, '${title}', '${poster}', ${rating}, ${rate_count}, '${user_name}')`;
+  const {movie_id, title, poster, rating, rate_count, release_date, user_name} = req.body;
+  const queryAddWatch = `INSERT INTO ToWatch (MOVIE_ID, TITLE, POSTER, RATING, RATE_COUNT, RELEASE_DATE, USER_NAME) VALUES (${movie_id}, '${title}', '${poster}', ${rating}, ${rate_count}, '${release_date}', '${user_name}')`;
   pool.query(queryAddWatch, (err, result) => {
     if(err) return next(err);
     res.locals.watch = result.rows;
