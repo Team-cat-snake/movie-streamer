@@ -4,6 +4,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 import App from './App.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
+import Search from './Search.jsx';
 
 export default function Nav(props) {
   const {submitLogin, submitSignup} = props;
@@ -24,6 +25,9 @@ export default function Nav(props) {
           <li className="link">
              <Link to="/signup">Signup</Link>
           </li>
+          <li className="link">
+            <Link to="/search">Search</Link>
+          </li>
         </ul>
      </nav>
       
@@ -38,6 +42,9 @@ export default function Nav(props) {
           <Signup 
             submitSignup={submitSignup}
           />
+        </Route>
+        <Route path="/search">
+          <Search />
         </Route>
       </Switch>
     </div>

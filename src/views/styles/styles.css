@@ -52,6 +52,23 @@ body {
   max-height: 100vh;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.link { 
+  margin: 5px;
+}
+
 .navbar {
   max-height: 100vh;
 }
@@ -80,4 +97,15 @@ body {
 
 .login-form input {
   width: 180px;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
