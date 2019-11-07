@@ -3,7 +3,6 @@ const uuidv4 = require('uuid/v4');
 
 const isLoggedIn = (req, res, next) => {
   if (req.headers.cookie === undefined) return next();
-  console.log('req.headers.cookie: ', req.headers.cookie)
   const queryForCookie = `SELECT * from Sessions WHERE COOKIEID = '${req.headers.cookie.slice(13)}'`
   pool.query(queryForCookie, (err, result)=> {
     if (result === undefined) return next();

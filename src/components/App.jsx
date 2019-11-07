@@ -3,6 +3,7 @@ import axios from 'axios';
 import NowPlaying from './NowPlaying';
 import MovieDetail from './MovieDetail';
 import SearchResult from './SearchResult';
+import SearchForm from './SearchForm';
 import Nav from './Nav';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ class App extends Component {
       searchResult:[],
       movieDetail: {},
       verified: false,
+      condition: 'home'
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -30,7 +32,12 @@ class App extends Component {
     axios
       .post('/login', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'verified') this.setState({verified: true});
+        if(res.data === 'verified') {
+          this.setState({
+            verified: true,
+            condition: 'home'
+          });
+        }
       })
   }
 
@@ -41,7 +48,12 @@ class App extends Component {
     axios
       .post('/signup', {user: username, pass: password})
       .then(res => {
-        if(res.data === 'user Created') this.setState({verified: true});
+        if(res.data === 'user Created') {
+          this.setState({
+            verified: true,
+            condition: 'home'
+          });
+        }
       })
   }
 
@@ -64,7 +76,10 @@ class App extends Component {
       .get(`/movie/search/${searched}`)
       .then(res => {
         const { searchResult } = res.data;
-        this.setState({searchResult})
+        this.setState({
+          searchResult,
+          condition: 'search'
+        })
       })
       .catch(err => {
         console.error(err);
@@ -77,7 +92,10 @@ class App extends Component {
       .get(`movie/details/${id}`)
       .then(res => {
         const { movieDetail } = res.data;
-        this.setState({movieDetail});
+        this.setState({
+          movieDetail,
+          condition: 'detail'
+        });
       })
       .catch(err => {
         console.error(err);
@@ -108,22 +126,25 @@ class App extends Component {
             submitLogin={this.submitLogin}
             submitSignup={this.submitSignup}
           />
-          <form onSubmit={this.getSearchResult}>
-            <input type='text' name='searched' placeholder='Find Movies' />
-            <button type='submit'>Search</button>
-          </form>
+        </Router>
+        <SearchForm getSearchResult={this.getSearchResult} /> 
+        { this.state.condition === 'home' &&
+          <NowPlaying 
+            nowPlaying={this.state.nowPlaying} 
+            getMovieDetail={this.getMovieDetail}
+          /> 
+        }
+        { this.state.condition === 'search' &&
           <SearchResult 
             searchResult={this.state.searchResult} 
             getMovieDetail={this.getMovieDetail} 
           />
-          <NowPlaying 
-            nowPlaying={this.state.nowPlaying} 
-            getMovieDetail={this.getMovieDetail}
-          />
+        }
+        { this.state.condition === 'detail' &&
           <MovieDetail 
             movieDetail={this.state.movieDetail} 
           />
-        </Router>
+        }
       </div>
     )
   }

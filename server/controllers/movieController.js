@@ -65,7 +65,7 @@ movieController.getDetail = (req, res, next) => {
         id: movieDetail.id,
         title: movieDetail.title,
         budget: movieDetail.budget,
-        backdrop: imageURL(movieDetail.backdrop_path),
+        backdrop: imageURL(movieDetail.backdrop_path? movieDetail.backdrop_path : movieDetail.poster_path),
         poster: imageURL(movieDetail.poster_path),
         overview: movieDetail.overview,
         rating: movieDetail.vote_average,

@@ -32,8 +32,6 @@ const verifyUser = (req, res, next) => {
   })
 }
 
-
-
 module.exports = {
   createUser,
   verifyUser
