@@ -151,16 +151,26 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getNowPlaying();
+    console.log('in CDM')
     axios
-      .get('/loggedIn')
-      .then(res => {
-        if(res.data.verified) {
-          this.setState({
-            verified: true, 
-            currentUser: res.data.cookie.userid
+      .get('/movie')
+      .then(result => {
+        axios
+          .get('/loggedIn')
+          .then(res => {
+            if(res.data.verified) {
+              const {nowPlaying} = result.data
+              this.setState({
+                nowPlaying,
+                condition: 'home',
+                verified: true, 
+                currentUser: res.data.cookie.userid
+              });
+            }
+          })
+          .catch(err => {
+            console.error(err);
           });
-        }
       })
       .catch(err => {
         console.error(err);
@@ -221,7 +231,7 @@ class App extends Component {
             <Favorites favorites={this.state.favorites}/>
           </Route>
           <Route path="/toWatch">
-            <toWatch toWatch={this.state.toWatch}/>
+            <ToWatch toWatch={this.state.toWatch}/>
           </Route>
         </Switch>
       </Router>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 
 export default function Nav({verified, logOut, user, getFavorites, getToWatch}) {
   let links;
@@ -19,7 +19,7 @@ export default function Nav({verified, logOut, user, getFavorites, getToWatch}) 
     links = (
       <ul className = "nav-ul">
         <li>
-          <Link className="link" onClick={getFavorites} to="/favorites">Favorites</Link>
+          <Link className="link" onClick={getFavorites} to="/favs">Favorites</Link>
         </li>
         <li>
           <Link className="link" onClick={getToWatch} to="/toWatch">To Watch</Link>
@@ -33,11 +33,11 @@ export default function Nav({verified, logOut, user, getFavorites, getToWatch}) 
   return (
     <nav className="navbar">
       <div className="logo-container">
-        <Link id="logo" onClick={()=>window.location.reload()} to="/">
+        <Link id="logo" to="/">
           <i className="fas fa-film"></i>
         </Link>
         <h2>
-          <Link id="logo" onClick={()=>window.location.reload()} to="/">Movie On</Link>
+          <Link id="logo" to="/">Movie On</Link>
         </h2>
       </div>
       {links}
