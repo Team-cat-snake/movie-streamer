@@ -10,9 +10,9 @@ const NowPlaying = ({ nowPlaying, getMovieDetail }) => {
   }
 
   return(
-    <div className='nowPlaying'>
+    <div className='now-playing-container'>
       <h2>Now Playing</h2>
-      <div className='movieList'>
+      <div className='now-playing-list'>
         {newMovieList}
       </div>
     </div>

@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import NowPlaying from './NowPlaying';
-import MovieDetail from './MovieDetail';
-import SearchResult from './SearchResult';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Nav from './Nav';
+import Login from './Login';
+import Signup from './Signup';
+import SearchForm from './SearchForm';
+import NowPlaying from './NowPlaying';
+import SearchResult from './SearchResult';
+import MovieDetail from './MovieDetail';
 
 class App extends Component {
   constructor() {
@@ -34,7 +39,6 @@ class App extends Component {
         if(res.data === 'verified') {
           this.setState({
             verified: true,
-            condition: 'home',
             currentUser: username
           });
         }
@@ -51,7 +55,6 @@ class App extends Component {
         if(res.data === 'user Created') {
           this.setState({
             verified: true,
-            condition: 'home',
             currentUser: username
           });
         }
@@ -78,8 +81,7 @@ class App extends Component {
       .then(res => {
         const { searchResult } = res.data;
         this.setState({
-          searchResult,
-          condition: 'search'
+          searchResult
         })
       })
       .catch(err => {
@@ -95,8 +97,7 @@ class App extends Component {
       .then(res => {
         const { movieDetail } = res.data;
         this.setState({
-          movieDetail,
-          condition: 'detail'
+          movieDetail
         });
       })
       .catch(err => {
@@ -109,7 +110,12 @@ class App extends Component {
     axios
       .get('/loggedIn')
       .then(res => {
-        if(res.data.verified) this.setState({verified: true, currentUser: res.data.cookie.userid});
+        if(res.data.verified) {
+          this.setState({
+            verified: true, 
+            currentUser: res.data.cookie.userid
+          });
+        }
       })
       .catch(err => {
         console.error(err);
@@ -117,32 +123,40 @@ class App extends Component {
   }
 
   render() {
-    console.log('is user verified? ', this.state.verified);
-    console.log('current user: ', this.state.currentUser);
     return (
-      <div>
-        <Nav 
-          submitLogin={this.submitLogin}
-          submitSignup={this.submitSignup}
-        />
-        { this.state.condition === 'home' &&
-          <NowPlaying 
-            nowPlaying={this.state.nowPlaying} 
-            getMovieDetail={this.getMovieDetail}
-          /> 
-        }
-        { this.state.condition === 'search' &&
-          <SearchResult 
-            searchResult={this.state.searchResult} 
-            getMovieDetail={this.getMovieDetail} 
-          />
-        }
+      <Router>
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <SearchForm />
+            <NowPlaying 
+              nowPlaying={this.state.nowPlaying} 
+              getMovieDetail={this.getMovieDetail}
+            /> 
+          </Route>
+          <Route path="/login">
+            <Login 
+              submitLogin={this.submitLogin}
+            />
+          </Route>
+          <Route path="/signup">
+            <Signup 
+              submitSignup={this.submitSignup}
+            />
+          </Route>
+          <Route path="/search">
+            <SearchResult 
+              searchResult={this.state.searchResult} 
+              getMovieDetail={this.getMovieDetail} 
+            />
+          </Route>
+        </Switch>
         { this.state.condition === 'detail' &&
           <MovieDetail 
             movieDetail={this.state.movieDetail} 
           />
         }
-      </div>
+      </Router>
     )
   }
 }

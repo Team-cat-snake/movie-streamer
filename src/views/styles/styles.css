@@ -3,50 +3,157 @@ html,
 body {
   height: 100%;
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #045590;
 }
 
 body {
   background: ghostwhite;
 }
 
-#root {
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.movieList {
-  border: 1px black solid;
+.login-signup-container {
+  margin: auto;
+  margin-top: 150px;
+  padding: 40px;
+  width: 45%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 2px #045590 solid;
+  border-radius: 10px;
+}
+
+.login-signup-container .login-signup-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-signup-container .login-signup-form input {
+  font-size: 20px;
+  width: 350px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.login-signup-container .login-signup-form button {
+  font-size: 25px;
+  width: 360px;
+  padding: 10px 0px;
+  background: #045590;
+  color: ghostwhite;
+  border-radius: 5px;
+  border: 0;
+}
+
+.login-signup-container .login-signup-form button:hover {
+  background: #ffe484;
+  color: #045590;
+  cursor: pointer;
+}
+
+.search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 100px;
+}
+
+.search-form input {
+  font-size: 20px;
+  width: 380px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.search-form button {
+  font-size: 20px;
+  padding: 10px 30px;
+  background: #045590;
+  color: ghostwhite;
+  border-radius: 5px;
+  border: 0;
+}
+
+.search-form button:hover {
+  background: #ffe484;
+  color: #045590;
+  cursor: pointer;
+}
+
+.now-playing-container h2 {
+  text-align: center;
+}
+
+.now-playing-container .now-playing-list {
+  border: 1px #045590 solid;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  width: 94%;
   height: 65vh;
   overflow-x: scroll;
   padding-top: 40px;
 }
 
-.movieList .eachMovie {
+.search-list {
+  border: 1px #045590 solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 130vh;
+  overflow-x: scroll;
+  padding-top: 40px;
+}
+
+.eachMovie {
   margin-left: 20px;
 }
 
-.movieList .eachMovie img {
+.eachMovie img {
   max-width: 400px;
   max-height: 400px;
 }
 
-.movieList .eachMovie img:hover {
+.eachMovie img:hover {
   -webkit-transform: scale(1.04);
   transform: scale(1.04);
   cursor: pointer;
 }
 
-.movieDetail {
+.movie-detail {
   margin-top: 100px;
 }
 
-.movieDetail img {
+.movie-detail img {
   max-width: 100%;
   max-height: 100vh;
 }
@@ -57,9 +164,6 @@ body {
   background: #045590;
   position: fixed;
   top: 0;
-}
-
-.navbar .nav-links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -71,16 +175,36 @@ body {
           align-items: center;
 }
 
-.navbar .nav-links a {
+.navbar #logo {
+  font-size: 30px;
+  font-weight: bold;
   color: ghostwhite;
   text-decoration: none;
+  margin-left: 20px;
 }
 
-.navbar .nav-links a:hover {
-  color: purple;
+.navbar #logo:hover {
+  color: #ffe484;
+  font-size: 33px;
 }
 
-.navbar .nav-links ul {
+.navbar .link {
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-right: 30px;
+  font-size: 18px;
+  color: #045590;
+  background: ghostwhite;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.navbar .link:hover {
+  color: #045590;
+  background: #ffe484;
+}
+
+.navbar ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -93,7 +217,7 @@ body {
   list-style-type: none;
 }
 
-.navbar .nav-links ul li {
+.navbar ul li {
   font-size: 14px;
 }
 /*# sourceMappingURL=styles.css.map */

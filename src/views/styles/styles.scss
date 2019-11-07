@@ -1,50 +1,133 @@
-$prime-color-1: black;
+$prime-color-1: #045590;
 $prime-color-2: ghostwhite;
-$prime-color-3: purple;
+$prime-color-3: #ffe484;
 
 /* general */
 html,
 body {
   height: 100%;
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: $prime-color-1;
 }
 
 body {
   background: $prime-color-2;
 }
 
-#root {
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.movieList {
-  border: 1px $prime-color-1 solid;
+.login-signup-container {
+  margin: auto;
+  margin-top: 150px;
+  padding: 40px;
+  width: 45%;
   display: flex;
-  width: 100%;
-  height: 65vh;
-  overflow-x: scroll;
-  padding-top: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px $prime-color-1 solid;
+  border-radius: 10px;
 
-  .eachMovie {
-    margin-left: 20px;
-
-    img {
-      max-width: 400px;
-      max-height: 400px;
-
+  .login-signup-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    input {
+      font-size: 20px;
+      width: 350px;
+      height: 40px;
+      margin: 20px;
+      border-radius: 5px;
+    }
+  
+    button {
+      font-size: 25px;
+      width: 360px;
+      padding: 10px 0px;
+      background: $prime-color-1;
+      color: $prime-color-2;
+      border-radius: 5px;
+      border: 0;
+      
       &:hover {
-        -webkit-transform: scale(1.04);
-        transform: scale(1.04);
+        background: $prime-color-3;
+        color: $prime-color-1;
         cursor: pointer;
       }
     }
   }
 }
 
-.movieDetail {
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+
+  input {
+    font-size: 20px;
+    width: 380px;
+    height: 40px;
+    margin: 20px;
+    border-radius: 5px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 10px 30px;
+    background: $prime-color-1;
+    color: $prime-color-2;
+    border-radius: 5px;
+    border: 0;
+    
+    &:hover {
+      background: $prime-color-3;
+      color: $prime-color-1;
+      cursor: pointer;
+    }
+  }
+}
+
+.now-playing-container {
+  h2 {
+    text-align: center;
+  }
+  .now-playing-list {
+    border: 1px $prime-color-1 solid;
+    border-radius: 10px;
+    display: flex;
+    margin: auto;
+    width: 94%;
+    height: 65vh;
+    overflow-x: scroll;
+    padding-top: 40px;
+  }
+}
+
+.search-list {
+  border: 1px $prime-color-1 solid;
+  display: flex;
+  width: 100%;
+  height: 130vh;
+  overflow-x: scroll;
+  padding-top: 40px;
+}
+
+.eachMovie {
+  margin-left: 20px;
+  img {
+    max-width: 400px;
+    max-height: 400px;
+
+    &:hover {
+      -webkit-transform: scale(1.04);
+      transform: scale(1.04);
+      cursor: pointer;
+    }
+  }
+}
+
+.movie-detail {
   margin-top: 100px;
   img{
     max-width: 100%;
@@ -55,33 +138,50 @@ body {
 .navbar {
   height: 80px;
   width: 100%;
-  background: #045590;
+  background: $prime-color-1;
   position: fixed;
   top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  .nav-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    a {
-      color: $prime-color-2;;
-      text-decoration: none;
+  #logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: $prime-color-2;;
+    text-decoration: none;
+    margin-left: 20px;
 
-      &:hover {
-        color: $prime-color-3;
-      }
+    &:hover {
+      color: $prime-color-3;
+      font-size: 33px;
     }
+  }
+  
+  .link {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-right: 30px;
+    font-size: 18px;
+    color: $prime-color-1;
+    background: $prime-color-2;
+    font-weight: bold;
+    border-radius: 5px;
 
-    ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      list-style-type: none;
+    &:hover {
+      color: $prime-color-1;
+      background: $prime-color-3;
+    }
+  }
 
-      li {
-        font-size: 14px;
-      }
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+
+    li {
+      font-size: 14px;
     }
   }
 }
