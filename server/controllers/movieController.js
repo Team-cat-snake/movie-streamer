@@ -4,19 +4,21 @@ const movieController = {};
 const { imageURL } = require('../utils/imageURL');
 
 movieController.getNowPlaying = (req, res, next) => {
-
   axios
     .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.API_KEY}&language=en-US&page=1`)
     .then(result => {
       const results = result.data.results;
       res.locals.nowPlaying = [];
-      for(let i = 0; i < Object.keys(results).length; i++) {
-        res.locals.nowPlaying[i] = {
-          id: results[i].id,
-          title: results[i].title,
-          poster: imageURL(results[i].poster_path),
-          rating: results[i].vote_average,
-          rateCount: results[i].vote_count
+      for(let i = 0; i < results.length; i++) {
+        if(results[i].poster_path) {
+          res.locals.nowPlaying.push({
+            id: results[i].id,
+            title: results[i].title,
+            poster: imageURL(results[i].poster_path),
+            rating: results[i].vote_average,
+            rateCount: results[i].vote_count,
+            releaseDate: results[i].release_date
+          })
         }
       }
       return next();
@@ -37,13 +39,16 @@ movieController.getSearchedResult = (req, res, next) => {
     .then(result => {
       const results = result.data.results;
       res.locals.searchResult = [];
-      for(let i = 0; i < Object.keys(results).length; i++) {
-        res.locals.searchResult[i] = {
-          id: results[i].id,
-          title: results[i].title,
-          poster: imageURL(results[i].poster_path),
-          rating: results[i].vote_average,
-          rateCount: results[i].vote_count
+      for(let i = 0; i <results.length; i++) {
+        if(results[i].poster_path) {
+          res.locals.searchResult.push({
+            id: results[i].id,
+            title: results[i].title,
+            poster: imageURL(results[i].poster_path),
+            rating: results[i].vote_average,
+            rateCount: results[i].vote_count,
+            releaseDate: results[i].release_date
+          })
         }
       }
       return next();
@@ -65,14 +70,15 @@ movieController.getDetail = (req, res, next) => {
         id: movieDetail.id,
         title: movieDetail.title,
         budget: movieDetail.budget,
-        backdrop: imageURL(movieDetail.backdrop_path),
+        backdrop: imageURL(movieDetail.backdrop_path? movieDetail.backdrop_path : movieDetail.poster_path),
         poster: imageURL(movieDetail.poster_path),
         overview: movieDetail.overview,
+        runtime: movieDetail.runtime,
         rating: movieDetail.vote_average,
-        rateCount: movieDetail.rateCount,
+        rateCount: movieDetail.vote_count,
         tagline: movieDetail.tagline,
-        realeaseDate: movieDetail.realease_date,
-        hompage: movieDetail.hompage
+        releaseDate: movieDetail.release_date,
+        homepage: movieDetail.homepage
       }
       return next();
     })

@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
+app.use('/toWatch', toWatch);
 app.use('/favs', favs);
 app.use('/movie', movies);
 
@@ -22,12 +23,24 @@ app.get('/loggedIn', sessionController.isLoggedIn, (req, res) => {
   res.status(200).send(res.locals);
 });
 
+app.get('/login', (req, res) => {
+  res.redirect('/');
+})
+
+app.get('/signup', (req, res) => {
+  res.redirect('/');
+})
+
 app.post('/login', userController.verifyUser, sessionController.startSession, (req, res) => {
 	res.status(200).send(res.locals);
 });
 
 app.post('/signup', userController.createUser, sessionController.startSession, (req, res) => {
-	res.status(200).send(res.locals);
+  res.status(200).send(res.locals);
+});
+
+app.post('/logout', sessionController.logOut, (req, res) => {
+  res.status(200).send(res.locals);
 });
 
 app.get("/", (req, res) => {
