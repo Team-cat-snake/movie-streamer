@@ -7,7 +7,7 @@ const ToWatch = ({toWatch}) => {
       <EachMovie key={nowPlaying.indexOf(movie)} id={movie.id} title={movie.title} releaseDate={movie.releaseDate} poster={movie.poster} rating={movie.rating} rateCount={movie.rateCount} getMovieDetail={getMovieDetail} />
     )
   }
-
+  
   return(
     <div className='watch-favorites-container'>
       <h2>To Watch List</h2>

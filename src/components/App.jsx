@@ -26,12 +26,24 @@ class App extends Component {
       toWatch: []
     }
 
+    this.reset = this.reset.bind(this);
     this.getNowPlaying = this.getNowPlaying.bind(this);
     this.getSearchResult = this.getSearchResult.bind(this);
     this.getMovieDetail = this.getMovieDetail.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
     this.submitSignup = this.submitSignup.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+    this.getToWatch = this.getToWatch.bind(this);
+  }
+
+  reset() {
+    this.setState({
+      owPlaying: [],
+      searchResult:[],
+      movieDetail: {},
+      condition: 'home',
+    })
   }
 
   submitLogin(e) {
@@ -111,6 +123,14 @@ class App extends Component {
       })
   }
 
+  getToWatch() {
+    axios
+      .post('/toWatch', {user: this.state.currentUser})
+      .then(res => {
+        this.setState({toWatch: res.data})
+      })
+  }
+
   getNowPlaying() {  
     axios
       .get('/movie')
@@ -162,16 +182,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getNowPlaying();
     axios
-      .get('/loggedIn')
-      .then(res => {
-        if(res.data.verified) {
-          this.setState({
-            verified: true, 
-            currentUser: res.data.cookie.userid
+      .get('/movie')
+      .then(result => {
+        axios
+          .get('/loggedIn')
+          .then(res => {
+            if(res.data.verified) {
+              const {nowPlaying} = result.data
+              this.setState({
+                nowPlaying,
+                condition: 'home',
+                verified: true, 
+                currentUser: res.data.cookie.userid
+              });
+            }
+          })
+          .catch(err => {
+            console.error(err);
           });
-        }
       })
       .catch(err => {
         console.error(err);
@@ -179,11 +208,16 @@ class App extends Component {
   }
 
   render() {
-    console.log('are we verifed? ', this.state.verified);
-    console.log('current user: ', this.state.currentUser);
     return (
       <Router>
-        <Nav verified={this.state.verified} logOut={this.logOut} user={this.state.currentUser}/>
+        <Nav 
+          verified={this.state.verified}
+          logOut={this.logOut}
+          user={this.state.currentUser}
+          getFavorites={this.getFavorites}
+          getToWatch={this.getToWatch}
+          reset={this.reset}
+        />
         <Switch>
           <Route exact path="/">
             <SearchForm getSearchResult={this.getSearchResult}/>
@@ -222,11 +256,11 @@ class App extends Component {
               />
             }
           </Route>
-          <Route path="/favorites">
-            <Favorites favorites={this.state.favorites} /> 
+          <Route path="/favs">
+            <Favorites favorites={this.state.favorites}/>
           </Route>
           <Route path="/toWatch">
-            <ToWatch toWatch={this.state.toWatch} />
+            <ToWatch toWatch={this.state.toWatch}/>
           </Route>
         </Switch>
       </Router>
