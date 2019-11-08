@@ -34,7 +34,11 @@ class App extends Component {
     this.submitSignup = this.submitSignup.bind(this);
     this.logOut = this.logOut.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
+    this.addFavorites = this.addFavorites.bind(this);
+    this.deleteFavorites = this.deleteFavorites.bind(this);
     this.getToWatch = this.getToWatch.bind(this);
+    this.addToWatch = this.addToWatch.bind(this);
+    this.deleteToWatch = this.deleteToWatch.bind(this);
   }
 
   reset() {
@@ -96,38 +100,76 @@ class App extends Component {
   getFavorites() {
     axios
       .post('/favs', {
-        user: this.state.currentUser
+        user_name: this.state.currentUser
       })
       .then(res => {
         this.setState({favorites: res.data})
       })
   }
 
-  addFavorites() {
+  addFavorites(movie) {
     axios
       .post('/favs/add', {
-        user: this.state.currentUser
+        movie_id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        rating: movie.rating,
+        rate_count: movie.rateCount,
+        release_date: movie.releaseDate,
+        user_name: this.state.currentUser
       })
       .then(res => {
-        this.setState({favorites: res.data})
+        let favCopy = this.state.favorites.slice();
+        this.setState({favorites: favCopy})
       })
   }
 
-  deleteFavorites() {
+  deleteFavorites(movie) {
     axios
-      .delete('/', {
-        user: this.state.currentUser
+      .delete('/favs', {
+        movie_id: movie.id,
+        user_name: this.state.currentUser
       })
       .then(res => {
-        this.setState({favorites: res.data})
+        let filtered = this.state.favorites.filter((obj) => obj !== movie)
+        this.setState({favorites: filtered})
       })
   }
 
   getToWatch() {
     axios
-      .post('/toWatch', {user: this.state.currentUser})
+      .post('/toWatch', {user_name: this.state.currentUser})
       .then(res => {
         this.setState({toWatch: res.data})
+      })
+  }
+
+  addToWatch(movie) {
+    axios
+      .post('/toWatch/add', {
+        movie_id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        rating: movie.rating,
+        rate_count: movie.rateCount,
+        release_date: movie.releaseDate,
+        user_name: this.state.currentUser
+      })
+      .then(res => {
+        let watchCopy = this.state.toWatch.slice();
+        this.setState({toWatch: watchCopy})
+      })
+  }
+
+  deleteToWatch(movie) {
+    axios
+      .delete('/toWatch', {
+        movie_id: movie.id,
+        user_name: this.state.currentUser
+      })
+      .then(res => {
+        let filtered = this.state.toWatch.filter((obj) => obj !== movie)
+        this.setState({toWatch: filtered})
       })
   }
 
