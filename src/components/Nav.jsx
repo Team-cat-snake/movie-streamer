@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, } from 'react-router-dom';
 
-export default function Nav({verified, logOut, user, getFavorites, getToWatch}) {
+export default function Nav({verified, logOut, user, getFavorites, getToWatch, reset}) {
   let links;
   if(!verified) {
     links = (
@@ -17,7 +17,8 @@ export default function Nav({verified, logOut, user, getFavorites, getToWatch}) 
   }
   else {
     links = (
-      <ul className = "nav-ul">
+      <ul className="nav-ul">
+        <p className='username'>{`Welcome ${user}`}</p>
         <li>
           <Link className="link" onClick={getFavorites} to="/favs">Favorites</Link>
         </li>
@@ -33,11 +34,11 @@ export default function Nav({verified, logOut, user, getFavorites, getToWatch}) 
   return (
     <nav className="navbar">
       <div className="logo-container">
-        <Link id="logo" to="/">
+        <Link id="logo" onClick={reset} to="/">
           <i className="fas fa-film"></i>
         </Link>
         <h2>
-          <Link id="logo" to="/">Movie On</Link>
+          <Link id="logo" onClick={reset} to="/">Movie On</Link>
         </h2>
       </div>
       {links}
