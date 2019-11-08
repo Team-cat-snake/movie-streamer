@@ -103,19 +103,19 @@ class App extends Component {
         user_name: this.state.currentUser
       })
       .then(res => {
-        this.setState({favorites: res.data})
+        this.setState({favorites: res.data, condition: 'home'})
       })
   }
 
   addFavorites(movie) {
     axios
       .post('/favs/add', {
-        movie_id: movie.id,
+        id: movie.id,
         title: movie.title,
         poster: movie.poster,
         rating: movie.rating,
-        rate_count: movie.rateCount,
-        release_date: movie.releaseDate,
+        rate_count: movie.rate_count,
+        release_date: movie.release_date,
         user_name: this.state.currentUser
       })
       .then(res => {
@@ -127,18 +127,18 @@ class App extends Component {
   deleteFavorites(movie) {
     axios
       .delete('/favs', {
-        movie_id: movie.id,
+        id: movie.id,
         user_name: this.state.currentUser
       })
       .then(res => {
-        let filtered = this.state.favorites.filter((obj) => obj !== movie)
+        let filtered = this.state.favorites.filter((obj) => obj != movie)
         this.setState({favorites: filtered})
       })
   }
 
   getToWatch() {
     axios
-      .post('/toWatch', {user_name: this.state.currentUser})
+      .post('/toWatch', {user_name: this.state.currentUser, condition: 'home'})
       .then(res => {
         this.setState({toWatch: res.data})
       })
@@ -147,12 +147,12 @@ class App extends Component {
   addToWatch(movie) {
     axios
       .post('/toWatch/add', {
-        movie_id: movie.id,
+        id: movie.id,
         title: movie.title,
         poster: movie.poster,
         rating: movie.rating,
-        rate_count: movie.rateCount,
-        release_date: movie.releaseDate,
+        rate_count: movie.rate_count,
+        release_date: movie.release_date,
         user_name: this.state.currentUser
       })
       .then(res => {
@@ -164,11 +164,11 @@ class App extends Component {
   deleteToWatch(movie) {
     axios
       .delete('/toWatch', {
-        movie_id: movie.id,
+        id: movie.id,
         user_name: this.state.currentUser
       })
       .then(res => {
-        let filtered = this.state.toWatch.filter((obj) => obj !== movie)
+        let filtered = this.state.toWatch.filter((obj) => obj != movie)
         this.setState({toWatch: filtered})
       })
   }
@@ -208,6 +208,7 @@ class App extends Component {
 
   getMovieDetail(event, id) {
     event.preventDefault();
+    console.log(id);
     axios
       .get(`movie/details/${id}`)
       .then(res => {
@@ -280,7 +281,9 @@ class App extends Component {
             {
               this.state.condition === 'detail' &&
               <MovieDetail 
-                movieDetail={this.state.movieDetail} 
+                movieDetail={this.state.movieDetail}
+                addFavorites={this.addFavorites}
+                addToWatch={this.addToWatch}
               />
             }
           </Route>
@@ -299,10 +302,22 @@ class App extends Component {
             }
           </Route>
           <Route path="/favs">
-            <Favorites favorites={this.state.favorites}/>
+            {this.state.condition === 'detail' ? <Redirect to="/" /> :
+              <Favorites 
+                favorites={this.state.favorites}
+                getMovieDetail={this.getMovieDetail} 
+                deleteFavorites={this.deleteFavorites}
+              />
+            }
           </Route>
           <Route path="/toWatch">
-            <ToWatch toWatch={this.state.toWatch}/>
+            {this.state.condition === 'detail' ? <Redirect to="/" /> :
+              <ToWatch 
+                toWatch={this.state.toWatch}
+                getMovieDetail={this.getMovieDetail} 
+                deleteToWatch={this.deleteToWatch}
+              />
+            }
           </Route>
         </Switch>
       </Router>

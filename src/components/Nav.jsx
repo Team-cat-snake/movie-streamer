@@ -7,10 +7,10 @@ export default function Nav({verified, logOut, user, getFavorites, getToWatch, r
     links = (
       <ul className="nav-ul">
         <li>
-          <Link className="link" to="/login">Login</Link>
+          <Link className="link" to="/login"><i className="fas fa-sign-in-alt"></i> Login</Link>
         </li>
         <li>
-          <Link className="link" to="/signup">Signup</Link>
+          <Link className="link" to="/signup"><i className="fas fa-user-plus"></i> Signup</Link>
         </li>
       </ul>
     )
@@ -20,13 +20,13 @@ export default function Nav({verified, logOut, user, getFavorites, getToWatch, r
       <ul className="nav-ul">
         <p className='username'>{`Welcome ${user}`}</p>
         <li>
-          <Link className="link" onClick={getFavorites} to="/favs">Favorites</Link>
+          <Link className="link" onClick={getFavorites} to="/favs"><i className="fas fa-heart"></i> Favorites</Link>
         </li>
         <li>
-          <Link className="link" onClick={getToWatch} to="/toWatch">To Watch</Link>
+          <Link className="link" onClick={getToWatch} to="/toWatch"><i className="fas fa-star"></i> To Watch</Link>
         </li>
         <li>
-          <Link className="link" onClick={logOut} to="/">Log out</Link>
+          <Link className="link" onClick={logOut} to="/"><i className="fas fa-sign-out-alt"></i> Log out</Link>
         </li>
       </ul>
     )

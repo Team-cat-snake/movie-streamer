@@ -13,8 +13,8 @@ const getFavs = (req, res, next) => {
 }
 
 const addFavs = (req, res, next) => {
-  const {movie_id, title, poster, rating, rate_count, release_date, user_name} = req.body;
-  const queryAddFavs = `INSERT INTO Favorites (MOVIE_ID, TITLE, POSTER, RATING, RATE_COUNT, RELEASE_DATE, USER_NAME) VALUES (${movie_id}, '${title}', '${poster}', ${rating}, ${rate_count}, '${release_date}', '${user_name}')`;
+  const {id, title, poster, rating, rate_count, release_date, user_name} = req.body;
+  const queryAddFavs = `INSERT INTO Favorites (ID, TITLE, POSTER, RATING, RATE_COUNT, RELEASE_DATE, USER_NAME) VALUES (${id}, '${title}', '${poster}', ${rating}, ${rate_count}, '${release_date}', '${user_name}')`;
   pool.query(queryAddFavs, (err, result) => {
     if(err) return next(err);
     res.locals.favs = result.rows;
@@ -23,8 +23,8 @@ const addFavs = (req, res, next) => {
 }
 
 const deleteFavs = (req, res, next) => {
-  const {movie_id, user_name} = req.body;
-  const queryDeleteFavs = `DELETE FROM Favorites WHERE MOVIE_ID=${movie_id} AND USER_NAME=${user_name}`;
+  const {id, user_name} = req.body;
+  const queryDeleteFavs = `DELETE FROM Favorites WHERE ID=${id} AND USER_NAME=${user_name}`;
   pool.query(queryDeleteFavs, (err, result) => {
     if(err) return next(err);
     res.locals.favs = result.rows;
