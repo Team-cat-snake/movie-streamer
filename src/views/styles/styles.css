@@ -29,40 +29,6 @@ body {
   z-index: 10;
 }
 
-.navbar .logo-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.navbar .logo-container i {
-  font-size: 45px;
-}
-
-.navbar .logo-container i:hover {
-  color: #ffe484;
-  font-size: 48px;
-}
-
-.navbar .logo-container #logo {
-  font-size: 30px;
-  font-weight: bold;
-  color: ghostwhite;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-.navbar .logo-container #logo:hover {
-  color: #ffe484;
-  font-size: 33px;
-}
-
 .navbar .link {
   text-decoration: none;
   padding: 10px 20px;
@@ -92,8 +58,52 @@ body {
   list-style-type: none;
 }
 
+.navbar ul .username {
+  color: ghostwhite;
+  font-size: 23px;
+  padding: 20px;
+}
+
+.navbar ul .username:hover {
+  cursor: default;
+}
+
 .navbar ul li {
   font-size: 14px;
+}
+
+.logo-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo-container i {
+  font-size: 45px;
+}
+
+.logo-container i:hover {
+  color: #ffe484;
+  font-size: 48px;
+}
+
+.logo-container #logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: ghostwhite;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.logo-container #logo:hover {
+  color: #ffe484;
+  font-size: 33px;
 }
 
 .login-signup-container {
@@ -230,6 +240,27 @@ body {
   padding-top: 40px;
 }
 
+.watch-favorites-container {
+  margin-top: 100px;
+}
+
+.watch-favorites-container h2 {
+  text-align: center;
+}
+
+.watch-favorites-container .watch-favorites-list {
+  border: 4px #045590 solid;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  width: 94%;
+  height: 70vh;
+  overflow-x: scroll;
+  padding-top: 40px;
+}
+
 .eachMovie {
   width: 20%;
   padding: 20px;
@@ -247,7 +278,7 @@ body {
   cursor: pointer;
 }
 
-.movie-detail {
+.detail-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -263,8 +294,116 @@ body {
           align-items: center;
 }
 
+.detail-container #backdrop {
+  width: 100%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.movie-detail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 .movie-detail img {
-  max-width: 100%;
-  max-height: 100vh;
+  border-radius: 10px;
+  max-height: 500px;
+}
+
+.movie-detail .details {
+  height: 500px;
+  width: 60%;
+  text-align: center;
+  border: 4px #045590 solid;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  overflow: auto;
+}
+
+.movie-detail .details h1 {
+  margin-top: 50px;
+}
+
+.movie-detail .details .button-group {
+  float: right;
+}
+
+.movie-detail .details .button-group button {
+  font-size: 32px;
+  margin: 0px 5px;
+  border-radius: 10px;
+}
+
+.movie-detail .details .button-group button:hover {
+  cursor: pointer;
+}
+
+.movie-detail .details .button-group #fav-btn {
+  background: #045590;
+  color: pink;
+}
+
+.movie-detail .details .button-group #fav-btn:hover {
+  background: pink;
+  color: #045590;
+}
+
+.movie-detail .details .button-group #to-watch-btn {
+  background: #045590;
+  color: yellow;
+}
+
+.movie-detail .details .button-group #to-watch-btn:hover {
+  background: yellow;
+  color: #045590;
+}
+
+.movie-detail .details label {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.movie-detail .details span {
+  font-size: 20px;
+}
+
+.movie-detail .details .info {
+  margin-top: 20px;
+}
+
+.movie-detail .details .overview-container {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.movie-detail .details .overview-container p {
+  text-align: left;
+}
+
+.movie-detail .details .tagline {
+  font-size: 18px;
+  font-style: oblique;
+}
+
+.delete {
+  background: #045590;
+  font-size: 20px;
+  color: ghostwhite;
+}
+
+.delete:hover {
+  background: ghostwhite;
+  color: #045590;
 }
 /*# sourceMappingURL=styles.css.map */

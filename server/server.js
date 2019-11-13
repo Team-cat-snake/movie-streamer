@@ -23,11 +23,17 @@ app.get('/loggedIn', sessionController.isLoggedIn, (req, res) => {
   res.status(200).send(res.locals);
 });
 
+// for the react router redirecting
 app.get('/login', (req, res) => {
   res.redirect('/');
 })
-
 app.get('/signup', (req, res) => {
+  res.redirect('/');
+})
+app.get('/favorites', (req, res) => {
+  res.redirect('/');
+})
+app.get('/toWatch', (req, res) => {
   res.redirect('/');
 })
 

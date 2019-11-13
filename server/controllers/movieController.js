@@ -16,8 +16,8 @@ movieController.getNowPlaying = (req, res, next) => {
             title: results[i].title,
             poster: imageURL(results[i].poster_path),
             rating: results[i].vote_average,
-            rateCount: results[i].vote_count,
-            releaseDate: results[i].release_date
+            rate_count: results[i].vote_count,
+            release_date: results[i].release_date
           })
         }
       }
@@ -46,8 +46,8 @@ movieController.getSearchedResult = (req, res, next) => {
             title: results[i].title,
             poster: imageURL(results[i].poster_path),
             rating: results[i].vote_average,
-            rateCount: results[i].vote_count,
-            releaseDate: results[i].release_date
+            rate_count: results[i].vote_count,
+            release_date: results[i].release_date
           })
         }
       }
@@ -61,7 +61,6 @@ movieController.getSearchedResult = (req, res, next) => {
 
 movieController.getDetail = (req, res, next) => {
   let movieId = req.params.movieId;
-
   axios
     .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US`)
     .then(result => {
@@ -75,9 +74,9 @@ movieController.getDetail = (req, res, next) => {
         overview: movieDetail.overview,
         runtime: movieDetail.runtime,
         rating: movieDetail.vote_average,
-        rateCount: movieDetail.vote_count,
+        rate_count: movieDetail.vote_count,
         tagline: movieDetail.tagline,
-        releaseDate: movieDetail.release_date,
+        release_date: movieDetail.release_date,
         homepage: movieDetail.homepage
       }
       return next();

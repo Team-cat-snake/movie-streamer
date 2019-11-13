@@ -26,6 +26,7 @@ class App extends Component {
       toWatch: []
     }
 
+    this.reset = this.reset.bind(this);
     this.getNowPlaying = this.getNowPlaying.bind(this);
     this.getSearchResult = this.getSearchResult.bind(this);
     this.getMovieDetail = this.getMovieDetail.bind(this);
@@ -33,7 +34,20 @@ class App extends Component {
     this.submitSignup = this.submitSignup.bind(this);
     this.logOut = this.logOut.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
+    this.addFavorites = this.addFavorites.bind(this);
+    this.deleteFavorites = this.deleteFavorites.bind(this);
     this.getToWatch = this.getToWatch.bind(this);
+    this.addToWatch = this.addToWatch.bind(this);
+    this.deleteToWatch = this.deleteToWatch.bind(this);
+  }
+
+  reset() {
+    this.setState({
+      owPlaying: [],
+      searchResult:[],
+      movieDetail: {},
+      condition: 'home',
+    })
   }
 
   submitLogin(e) {
@@ -43,7 +57,6 @@ class App extends Component {
     axios
       .post('/login', {user: username, pass: password})
       .then(res => {
-        console.log(res.data)
         if(res.data.verified) {
           this.setState({
             verified: true,
@@ -86,17 +99,77 @@ class App extends Component {
 
   getFavorites() {
     axios
-      .post('/favs', {user: this.state.currentUser})
+      .post('/favs', {
+        user_name: this.state.currentUser
+      })
       .then(res => {
-        this.setState({favorites: res.data})
+        this.setState({favorites: res.data, condition: 'home'})
+      })
+  }
+
+  addFavorites(movie) {
+    axios
+      .post('/favs/add', {
+        id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        rating: movie.rating,
+        rate_count: movie.rate_count,
+        release_date: movie.release_date,
+        user_name: this.state.currentUser
+      })
+      .then(res => {
+        let favCopy = this.state.favorites.slice();
+        this.setState({favorites: favCopy})
+      })
+  }
+
+  deleteFavorites(movie) {
+    axios
+      .delete('/favs', {
+        id: movie.id,
+        user_name: this.state.currentUser
+      })
+      .then(res => {
+        let filtered = this.state.favorites.filter((obj) => obj != movie)
+        this.setState({favorites: filtered})
       })
   }
 
   getToWatch() {
     axios
-      .post('/toWatch', {user: this.state.currentUser})
+      .post('/toWatch', {user_name: this.state.currentUser, condition: 'home'})
       .then(res => {
         this.setState({toWatch: res.data})
+      })
+  }
+
+  addToWatch(movie) {
+    axios
+      .post('/toWatch/add', {
+        id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        rating: movie.rating,
+        rate_count: movie.rate_count,
+        release_date: movie.release_date,
+        user_name: this.state.currentUser
+      })
+      .then(res => {
+        let watchCopy = this.state.toWatch.slice();
+        this.setState({toWatch: watchCopy})
+      })
+  }
+
+  deleteToWatch(movie) {
+    axios
+      .delete('/toWatch', {
+        id: movie.id,
+        user_name: this.state.currentUser
+      })
+      .then(res => {
+        let filtered = this.state.toWatch.filter((obj) => obj != movie)
+        this.setState({toWatch: filtered})
       })
   }
 
@@ -135,6 +208,7 @@ class App extends Component {
 
   getMovieDetail(event, id) {
     event.preventDefault();
+    console.log(id);
     axios
       .get(`movie/details/${id}`)
       .then(res => {
@@ -151,7 +225,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('in CDM')
     axios
       .get('/movie')
       .then(result => {
@@ -178,8 +251,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('are we verifed? ', this.state.verified);
-    console.log('current user: ', this.state.currentUser);
     return (
       <Router>
         <Nav 
@@ -188,6 +259,7 @@ class App extends Component {
           user={this.state.currentUser}
           getFavorites={this.getFavorites}
           getToWatch={this.getToWatch}
+          reset={this.reset}
         />
         <Switch>
           <Route exact path="/">
@@ -209,7 +281,9 @@ class App extends Component {
             {
               this.state.condition === 'detail' &&
               <MovieDetail 
-                movieDetail={this.state.movieDetail} 
+                movieDetail={this.state.movieDetail}
+                addFavorites={this.addFavorites}
+                addToWatch={this.addToWatch}
               />
             }
           </Route>
@@ -228,10 +302,22 @@ class App extends Component {
             }
           </Route>
           <Route path="/favs">
-            <Favorites favorites={this.state.favorites}/>
+            {this.state.condition === 'detail' ? <Redirect to="/" /> :
+              <Favorites 
+                favorites={this.state.favorites}
+                getMovieDetail={this.getMovieDetail} 
+                deleteFavorites={this.deleteFavorites}
+              />
+            }
           </Route>
           <Route path="/toWatch">
-            <ToWatch toWatch={this.state.toWatch}/>
+            {this.state.condition === 'detail' ? <Redirect to="/" /> :
+              <ToWatch 
+                toWatch={this.state.toWatch}
+                getMovieDetail={this.getMovieDetail} 
+                deleteToWatch={this.deleteToWatch}
+              />
+            }
           </Route>
         </Switch>
       </Router>
