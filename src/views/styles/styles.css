@@ -11,6 +11,101 @@ body {
   background: ghostwhite;
 }
 
+.navbar {
+  height: 80px;
+  width: 100%;
+  background: #045590;
+  position: fixed;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 10;
+}
+
+.navbar .link {
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-right: 30px;
+  font-size: 18px;
+  color: #045590;
+  background: ghostwhite;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.navbar .link:hover {
+  color: #045590;
+  background: #ffe484;
+}
+
+.navbar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style-type: none;
+}
+
+.navbar ul .username {
+  color: ghostwhite;
+  font-size: 23px;
+  padding: 20px;
+}
+
+.navbar ul .username:hover {
+  cursor: default;
+}
+
+.navbar ul li {
+  font-size: 14px;
+}
+
+.logo-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo-container i {
+  font-size: 45px;
+}
+
+.logo-container i:hover {
+  color: #ffe484;
+  font-size: 48px;
+}
+
+.logo-container #logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: ghostwhite;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.logo-container #logo:hover {
+  color: #ffe484;
+  font-size: 33px;
+}
+
 .login-signup-container {
   margin: auto;
   margin-top: 150px;
@@ -118,12 +213,72 @@ body {
   display: flex;
   margin: auto;
   width: 94%;
-  height: 65vh;
+  height: 70vh;
   overflow-x: scroll;
   padding-top: 40px;
 }
 
-.search-result-container {
+.search-result-container h2 {
+  text-align: center;
+}
+
+.search-result-container .search-list {
+  border: 4px #045590 solid;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin: auto;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 94%;
+  height: 140vh;
+  overflow-x: scroll;
+  padding-top: 40px;
+}
+
+.watch-favorites-container {
+  margin-top: 100px;
+}
+
+.watch-favorites-container h2 {
+  text-align: center;
+}
+
+.watch-favorites-container .watch-favorites-list {
+  border: 4px #045590 solid;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  width: 94%;
+  height: 70vh;
+  overflow-x: scroll;
+  padding-top: 40px;
+}
+
+.eachMovie {
+  width: 20%;
+  padding: 20px;
+}
+
+.eachMovie img {
+  max-width: 400px;
+  max-height: 400px;
+  border-radius: 5px;
+}
+
+.eachMovie img:hover {
+  -webkit-transform: scale(1.04);
+  transform: scale(1.04);
+  cursor: pointer;
+}
+
+.detail-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,109 +294,116 @@ body {
           align-items: center;
 }
 
-.search-result-container .search-list {
-  border: 4px #045590 solid;
-  border-radius: 10px;
+.detail-container #backdrop {
+  width: 100%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.movie-detail {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  width: 90%;
-  height: 130vh;
-  overflow-x: scroll;
-  padding-top: 40px;
-}
-
-.eachMovie {
-  margin-left: 20px;
-}
-
-.eachMovie img {
-  max-width: 400px;
-  max-height: 400px;
-  border-radius: 5px;
-}
-
-.eachMovie img:hover {
-  -webkit-transform: scale(1.04);
-  transform: scale(1.04);
-  cursor: pointer;
-}
-
-.movie-detail {
-  margin-top: 100px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .movie-detail img {
-  max-width: 100%;
-  max-height: 100vh;
+  border-radius: 10px;
+  max-height: 500px;
 }
 
-.navbar {
-  height: 80px;
-  width: 95%;
+.movie-detail .details {
+  height: 500px;
+  width: 60%;
+  text-align: center;
+  border: 4px #045590 solid;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  overflow: auto;
+}
+
+.movie-detail .details h1 {
+  margin-top: 50px;
+}
+
+.movie-detail .details .button-group {
+  float: right;
+}
+
+.movie-detail .details .button-group button {
+  font-size: 32px;
+  margin: 0px 5px;
+  border-radius: 10px;
+}
+
+.movie-detail .details .button-group button:hover {
+  cursor: pointer;
+}
+
+.movie-detail .details .button-group #fav-btn {
   background: #045590;
-  position: fixed;
-  top: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  z-index: 10;
+  color: pink;
 }
 
-.navbar #logo {
-  font-size: 30px;
+.movie-detail .details .button-group #fav-btn:hover {
+  background: pink;
+  color: #045590;
+}
+
+.movie-detail .details .button-group #to-watch-btn {
+  background: #045590;
+  color: yellow;
+}
+
+.movie-detail .details .button-group #to-watch-btn:hover {
+  background: yellow;
+  color: #045590;
+}
+
+.movie-detail .details label {
   font-weight: bold;
-  color: ghostwhite;
-  text-decoration: none;
-  margin-left: 20px;
+  font-size: 20px;
 }
 
-.navbar #logo:hover {
-  color: #ffe484;
-  font-size: 33px;
+.movie-detail .details span {
+  font-size: 20px;
 }
 
-.navbar .link {
-  text-decoration: none;
-  padding: 10px 20px;
-  margin-right: 30px;
+.movie-detail .details .info {
+  margin-top: 20px;
+}
+
+.movie-detail .details .overview-container {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.movie-detail .details .overview-container p {
+  text-align: left;
+}
+
+.movie-detail .details .tagline {
   font-size: 18px;
-  color: #045590;
+  font-style: oblique;
+}
+
+.delete {
+  background: #045590;
+  font-size: 20px;
+  color: ghostwhite;
+}
+
+.delete:hover {
   background: ghostwhite;
-  font-weight: bold;
-  border-radius: 5px;
-}
-
-.navbar .link:hover {
   color: #045590;
-  background: #ffe484;
-}
-
-.navbar ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  list-style-type: none;
-}
-
-.navbar ul li {
-  font-size: 14px;
 }
 /*# sourceMappingURL=styles.css.map */
